@@ -1,0 +1,15 @@
+On a Linux system, put the downloaded file into a suitable directory.   
+
+Next, unzip the file (type the command "unzip ELEvuilleumierSFile1.zip” in a terminal). 
+
+Move into the ‘software’ directory (“cd software”).  Type "make" to compile the binaries.
+
+You can run the software by typing “./bin/cophylo.out” in the ‘software’ directory, and adding the appropriate flags (e.g., "-n 10" to compute 10 simulations). The file "Manual.pdf" from directory "manual" provides a complete description of software usage with a list of all possible flags.
+
+File "run_examples.sh" runs the software on a few example, and produces plots and computes network metrics using the R script "compute.R" from folder "Rscript". Just type "./run_examples.sh" in a terminal to compute these examples. The output plots and metrics are written in the "examples" folder.
+
+Notes:
+1. In order to compile the binaries you will need the gcc compiler. 
+2. In order to launch the R script, you will need the packages "ape" and "igraph", available from the CRAN website https://cran.r-project.org/
+
+
