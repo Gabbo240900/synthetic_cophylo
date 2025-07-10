@@ -122,7 +122,7 @@ def main():
 
     args = parser.parse_args()
 
-    time_grid = [1.5,2,2.5,3,3.5]
+    time_grid = [2]
     sim_index = 1
 
     for _ in tqdm(range(args.num_trees), desc="Simulating parameter sets"):
@@ -131,8 +131,8 @@ def main():
         s_lambda = random.uniform(*args.s_lambda)
         s_her = random.uniform(*args.s_her)
 
-        h_mu = random.uniform(0.2, 0.4) * (h_lambda + c_lambda)
-        s_mu = random.uniform(0.2, 0.4) * (s_lambda + c_lambda + s_her)
+        h_mu = random.uniform(0.3, 0.3) * (h_lambda + c_lambda)
+        s_mu = random.uniform(0.3, 0.3) * (s_lambda + c_lambda + s_her)
 
         for time_to_sim in time_grid:
             generator = GenerateTGLFiles(

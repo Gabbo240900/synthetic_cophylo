@@ -28,7 +28,7 @@ for folder in ["alcala_trees", "Dataset", "host_trees", "parasite_trees"]:
 class GenerateHostTree:
     """Class to generate host trees and their corresponding event frequency files."""
     
-    def __init__(self, num_trees, min_leaves, max_leaves, output_dir, tmrca=4.5):
+    def __init__(self, num_trees, min_leaves, max_leaves, output_dir, tmrca=2):
         self.num_trees = num_trees  
         self.min_leaves = min_leaves  
         self.max_leaves = max_leaves  
@@ -54,8 +54,10 @@ class GenerateHostTree:
 
         cmd = [
             "/Users/gabriele/Alcala-python/software/bin/cophylo.out",
-            "-l", "0.000001",
-            "-m", "0",
+            "-l", "0.7",
+            "-m", "0.615",
+            '-c', '1.0',
+            '-s', '0.05',
             "-t", str(self.tmrca),
             "-i", input_prefix,
             "-o", output_prefix,
@@ -87,7 +89,7 @@ class GenerateHostTree:
     def generate_random_tree(self, num_leaves, prefix="H"):
         """Generates a host tree using a birth-death process with given number of leaves."""
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=1.0, death_rate=0.5, num_extant_tips=num_leaves)
+        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.6, num_extant_tips=num_leaves)
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
         tmp_file.close()
 

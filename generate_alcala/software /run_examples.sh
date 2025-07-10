@@ -3,7 +3,7 @@
 ###############################################################################
 
 #Small example with cospeciation
-bin/cophylo.out -l 0.000001 -m 0 -t 4.5 -c 1.0 -s 0 -i examples/input/example_ -o examples/output/cospeciation_example_ -N 0 -S 3 -P examples/input/example_distribHperP.txt
+bin/cophylo.out -l 0.7 -m 0.615 -t 2 -c 1.0 -s 0.05 -i examples/input/tree1_ -o examples/output/tree1_ -N 1 -S 240900 -P examples/input/tree1_distribHperP.txt
 
 #Small example with host switch and no cospeciation
 bin/cophylo.out -l 0.2 -m 0 -t 4.5 -c 0 -s 1.0 -i examples/input/example_ -o examples/output/host-switch_example_ -N 0 -S 3 -P examples/input/example_distribHperP.txt

@@ -33,7 +33,7 @@ class GenerateHostTree:
     """Class to generate host trees and their corresponding event frequency files."""
     
     def __init__(self, num_trees, min_leaves, max_leaves, output_dir, 
-                 cospeciation_range=(50, 100)):
+                 cospeciation_range=(70, 100)):
         self.num_trees = num_trees  
         self.min_leaves = min_leaves  
         self.max_leaves = max_leaves  
@@ -53,7 +53,7 @@ class GenerateHostTree:
     def generate_random_tree(self, num_leaves, prefix="H"):
         """Generates a host tree using a birth-death process with given number of leaves."""
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=1.0, death_rate=0.5, num_extant_tips=num_leaves)
+        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.6, num_extant_tips=num_leaves)
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
         tmp_file.close()
 
@@ -77,12 +77,13 @@ class GenerateHostTree:
     def generate_cophylo_frequencies(self):
         while True:
             cospeciation = random.randint(self.cospeciation_range[0], self.cospeciation_range[1])
-            remaining = 100 - cospeciation
-            dirichlet_sample = np.random.dirichlet([1, 1, 1])
+            switch = 5
+            remaining = 100 - (cospeciation + switch)
+            dirichlet_sample = np.random.dirichlet([1, 1])
             scaled = [int(x * remaining) for x in dirichlet_sample]
             # Adjust the last value to ensure the total adds up
             scaled[-1] = remaining - sum(scaled[:-1])
-            duplication, loss, switch = scaled
+            duplication, loss = scaled
             return cospeciation, loss, switch, duplication
 
     def generate_and_save_trees(self):
