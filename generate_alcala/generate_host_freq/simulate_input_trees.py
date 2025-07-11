@@ -230,10 +230,8 @@ class GenerateHostTree:
 
     def save_specialist_distribution(self, tree, folder_path, tree_index):
         num_leaves = len(tree.get_leaves())
-        # weights = np.random.dirichlet([1.0] * (num_leaves + 1))  # Allow parasites to infect multiple hosts
-        # values = [f"{w:.6f}" for w in weights]
-        weights = ['1'] + ['0'] * (num_leaves - 1) 
-        values = [f"{w}" for w in weights]
+        weights = np.random.dirichlet([1.0] * (num_leaves + 1))  # Allow parasites to infect multiple hosts
+        values = [f"{w:.6f}" for w in weights]
         output_path = os.path.join(folder_path, f"host_tree_{tree_index}_distrib.txt")
         with open(output_path, "w") as f:
             f.write(" ".join(values))
