@@ -30,7 +30,7 @@ host_death = 0.6
 
 
 ## simulate with Coala High switch - it was able to create only 3 trees
-python simulate_input_trees.py --num_trees 50 \
+python simulate_input_trees.py --num_trees 100 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \
