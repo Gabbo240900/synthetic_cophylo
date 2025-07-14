@@ -55,9 +55,9 @@ class GenerateHostTree:
         cmd = [
             "/Users/gabriele/Alcala-python/software/bin/cophylo.out",
             "-l", "0.7",
-            "-m", "0.615",
-            '-c', '1.0',
-            '-s', '0.05',
+            "-m", "0.66",
+            '-c', '0.1',
+            '-s', '0.7',
             "-t", str(self.tmrca),
             "-i", input_prefix,
             "-o", output_prefix,
@@ -89,7 +89,7 @@ class GenerateHostTree:
     def generate_random_tree(self, num_leaves, prefix="H"):
         """Generates a host tree using a birth-death process with given number of leaves."""
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.6, num_extant_tips=num_leaves)
+        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.24, num_extant_tips=num_leaves)
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
         tmp_file.close()
 

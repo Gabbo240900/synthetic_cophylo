@@ -1,11 +1,35 @@
 # How to run the models 
 
-## simulate with Alcala model 
+## simulate with Alcala model high Switch
 python simulate_input_trees.py --num_trees 10 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
-## simulate with Coala
+(l = 0.7
+m = 0.66
+s = 0.7
+c = 0.1
+tmrca = 2
+host_birth = 0.7
+host_death = 0.24
+)
+
+## simulate with Alcala model high Cospeciation
+python simulate_input_trees.py --num_trees 10 \
+--min_leaves 15 --max_leaves 50 \
+--output_dir ./generate_host_freq/generated_trees/ 
+
+(l = 0.7
+m = 0.615
+s = 0.05
+c = 1.0
+tmrca = 2
+host_birth = 0.7
+host_death = 0.6
+)
+
+
+## simulate with Coala High switch - it was able to create only 3 trees
 python simulate_input_trees.py --num_trees 50 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
@@ -13,15 +37,53 @@ python simulate_input_trees.py --num_trees 50 \
 --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
 --num_threads 8
 
-## Simulate with treeducken
+(pc = random(0.05,0.1)
+ps = 0.7
+pd = random.dirichlet * (1 - pc -ps) 
+pl = 100-pc-ps-pd
+host_birth = 0.7
+host_death = 0.24)
+
+## simulate with Coala High cospeciation 
+python simulate_input_trees.py --num_trees 50 \
+--min_leaves 15 --max_leaves 50 \
+--output_dir ./generated_trees/ \
+--output_dir_tgl ./generated_trees/Datasets/ \
+--jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
+--num_threads 8
+
+(pc = random(0.7,1.0)
+ps = 0.05
+pd = random.dirichlet * (1 - pc -ps) 
+pl = 100-pc-ps-pd
+host_birth = 0.7
+host_death = 0.63)
+
+
+
+## Simulate with treeducken high_switch
 python simulate_input_files.py \
   --h_lambda 0.7 0.7 \
-  --c_lambda 1.3 1.3 \
+  --c_lambda 0.1 0.1 \
+  --s_lambda 0.7 0.7 \
+  --s_her 1.4 1.4 \
+  --num_trees 10
+
+(h_mu = 0.24
+s_mu = 0.66
+t = 2)
+
+## Simulate with treeducken high_cospeciation
+python simulate_input_files.py \
+  --h_lambda 0.7 0.7 \
+  --c_lambda 1.4 1.4 \
   --s_lambda 0.7 0.7 \
   --s_her 0.05 0.05 \
   --num_trees 10
 
-
+(h_mu = 0.63
+s_mu = 0.645
+t = 2)
 
 
 # How the models work 
