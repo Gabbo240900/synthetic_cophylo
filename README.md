@@ -45,7 +45,7 @@ host_birth = 0.7
 host_death = 0.24)
 
 ## simulate with Coala High cospeciation 
-python simulate_input_trees.py --num_trees 50 \
+python simulate_input_trees.py --num_trees 100 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \
