@@ -88,6 +88,7 @@ class GenerateTGLFiles:
         summary_df["Host_num_leaves"] = host_leaf_count
         summary_df["Parasite_num_leaves"] = symb_leaf_count
         summary_df["Sim_time"] = self.time_to_sim
+        summary_df['Total Events'] = total_events
 
         content = f"""#NEXUS
 BEGIN HOST;

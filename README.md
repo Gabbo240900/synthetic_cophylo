@@ -5,10 +5,11 @@ python simulate_input_trees.py --num_trees 10 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
+
 (l = 0.7
 m = 0.66
-s = 0.7
-c = 0.1
+s = random.uniform(0.5, 0.7)
+c = random.uniform(0.05, 0.1)
 tmrca = 2
 host_birth = 0.7
 host_death = 0.24
@@ -21,12 +22,27 @@ python simulate_input_trees.py --num_trees 10 \
 
 (l = 0.7
 m = 0.615
-s = 0.05
-c = 1.0
+s = random.uniform(0, 0.05)
+c = random.uniform(0.7, 1)
 tmrca = 2
 host_birth = 0.7
-host_death = 0.6
+host_death = 0.63
 )
+
+## simulate with Alcala model high Cospeciation
+python simulate_input_trees.py --num_trees 10 \
+--min_leaves 15 --max_leaves 50 \
+--output_dir ./generate_host_freq/generated_trees/ 
+
+(l = 0.7
+m = 0.6
+s = random.uniform(0.2, 0.4)
+c = random.uniform(0.2, 0.4)
+tmrca = 2
+host_birth = 0.7
+host_death = 0.45
+)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ## simulate with Coala High switch - it was able to create only 3 trees
@@ -38,7 +54,7 @@ python simulate_input_trees.py --num_trees 100 \
 --num_threads 8
 
 (pc = random(0.05,0.1)
-ps = 0.7
+ps = random(0.5, 0.7)
 pd = random.dirichlet * (1 - pc -ps) 
 pl = 100-pc-ps-pd
 host_birth = 0.7
@@ -53,20 +69,35 @@ python simulate_input_trees.py --num_trees 100 \
 --num_threads 8
 
 (pc = random(0.7,1.0)
-ps = 0.05
+ps = random(0, 0.05)
 pd = random.dirichlet * (1 - pc -ps) 
 pl = 100-pc-ps-pd
 host_birth = 0.7
 host_death = 0.63)
 
+## simulate with Coala Medium Values 
+python simulate_input_trees.py --num_trees 40 \
+--min_leaves 15 --max_leaves 50 \
+--output_dir ./generated_trees/ \
+--output_dir_tgl ./generated_trees/Datasets/ \
+--jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
+--num_threads 8
 
+(pc = random(0.2,0.4)
+ps = random(0.2, 0.4)
+pd = random.dirichlet * (1 - pc -ps) 
+pl = 100-pc-ps-pd
+host_birth = 0.7
+host_death = 0.45)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Simulate with treeducken high_switch
 python simulate_input_files.py \
   --h_lambda 0.7 0.7 \
-  --c_lambda 0.1 0.1 \
+  --c_lambda 0.1 0.2 \
   --s_lambda 0.7 0.7 \
-  --s_her 1.4 1.4 \
+  --s_her 1.4 1.7 \
   --num_trees 10
 
 (h_mu = 0.24
@@ -76,15 +107,28 @@ t = 2)
 ## Simulate with treeducken high_cospeciation
 python simulate_input_files.py \
   --h_lambda 0.7 0.7 \
-  --c_lambda 1.4 1.4 \
+  --c_lambda 1.4 1.7 \
   --s_lambda 0.7 0.7 \
-  --s_her 0.05 0.05 \
+  --s_her 0 0.05 \
   --num_trees 10
 
 (h_mu = 0.63
 s_mu = 0.645
 t = 2)
 
+## Simulate with treeducken med_values
+python simulate_input_files.py \
+  --h_lambda 0.7 0.7 \
+  --c_lambda 0.5 0.8 \
+  --s_lambda 0.7 0.7 \
+  --s_her 0.5 0.8 \
+  --num_trees 10
+
+(h_mu = 0.45
+s_mu = 0.6
+t = 2)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # How the models work 
 
