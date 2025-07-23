@@ -1,5 +1,5 @@
 Event,Frequency (%)
-Cospeciation,100
-Loss,-1
-Switch,2
-Duplication,-1
+Cospeciation,98
+Loss,1
+Switch,0
+Duplication,1
