@@ -1,7 +1,7 @@
 # How to run the models 
 
 ## simulate with Alcala model high Switch
-python simulate_input_trees.py --num_trees 10 \
+python simulate_input_trees.py --num_trees 100 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
@@ -16,7 +16,7 @@ host_death = 0.24
 )
 
 ## simulate with Alcala model high Cospeciation
-python simulate_input_trees.py --num_trees 10 \
+python simulate_input_trees.py --num_trees 100 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
@@ -76,7 +76,7 @@ host_birth = 0.7
 host_death = 0.63)
 
 ## simulate with Coala Medium Values 
-python simulate_input_trees.py --num_trees 40 \
+python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \

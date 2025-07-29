@@ -51,8 +51,8 @@ class GenerateHostTree:
         os.makedirs(parasite_folder, exist_ok=True)
         output_prefix = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}")
         distrib_path = os.path.join(base_path, f"host_tree_{host_tree_index}_distrib.txt")
-        c = random.uniform(0.2, 0.4)
         s = random.uniform(0.2, 0.4)
+        c = random.uniform(0.2, 0.4)
 
         cmd = [
             "/Users/gabriele/Alcala-python/software/bin/cophylo.out",
