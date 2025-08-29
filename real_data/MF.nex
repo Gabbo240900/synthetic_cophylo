@@ -1,0 +1,22 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((((a, b), ((i, h), (c, d))), j), e), ((f, g), k));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((1, 3), 2), (4, 5)), ((7, 8), (6, 9)));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+1 : g,
+2 : b,
+3 : g,
+4 : h,
+5 : c,
+6 : e,
+7 : g,
+8 : g,
+9 : f
+	;
+END;

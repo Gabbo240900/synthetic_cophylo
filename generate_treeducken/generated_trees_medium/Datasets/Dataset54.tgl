@@ -1,31 +1,42 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:0.07293845162,(H2:0.03267405157,H3:0.03267405157):0.04026440005):1.927061548;;
+    TREE * Host1 = (H1:0.2521257002,(H2:0.5275843896,((H4:0.3370873468,((((H9:0.06945149206,H10:0.06945149206):0.6032892965,(H8:0.1300257954,(H11:0.0575022661,H12:0.0575022661):0.07252352931):0.5427149932):0.09063560831,H5:0.7633763969):0.1136539048,(H6:0.1456023834,H7:0.2417543107):0.635275991):0.2714578015):0.3282344293,H3:0.07693462258):0.3242143515):0.1115905443):0.08747257169;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (P1:0.07293845162,P2:0.07293845162):1.927061548;;
+    TREE * Para1 = ((P2:0.3370873468,((P5:0.5078232863,P6:0.5078232863):0.2555531106,((P7:0.1958193551,P8:0.1958193551):0.4326377428,P4:0.04295348604):0.134919299):0.3851117063):0.7806000971,((P3:0.6727407886,(P9:0.1300257954,((P11:0.0575022661,P12:0.0575022661):0.04150648349,P10:0.004780196787):0.03101704582):0.5427149932):0.9651507662,P1:0.3645390604):0.2911966456):0.07091179969;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P1: H1
-		P2: H2
-		P2: H3
+		P3: H7
+		P3: H9
+		P3: H10
+		P5: H9
+		P5: H10
+		P6: H7
+		P7: H5
+		P7: H7
+		P8: H5
+		P8: H7
+		P8: H9
+		P9: H8
+		P11: H11
+		P12: H12
     ;
 END;
 
-Cospeciations           0.5
-Host_Speciations        0.5
-Host_Extinctions        NaN
-Symbiont_Speciations    NaN
-Symbiont_Extinctions    NaN
-Host_Spread/Switches    NaN
-Dispersals              NaN
-Extirpations            NaN
-Parafit_Stat            NaN
-Parafit_P-value         NaN
-Host_num_leaves         3.0
-Parasite_num_leaves     2.0
-Sim_time                2.0
-Total Events            2.0
+Cospeciations            0.217391
+Host_Speciations         0.260870
+Host_Extinctions         0.217391
+Symbiont_Speciations     0.086957
+Symbiont_Extinctions     0.173913
+Host_Spread/Switches     0.043478
+Dispersals                    NaN
+Extirpations                  NaN
+Parafit_Stat            89.647903
+Parafit_P-value          0.010000
+Host_num_leaves         12.000000
+Parasite_num_leaves     12.000000
+Sim_time                 2.000000
+Total Events            23.000000

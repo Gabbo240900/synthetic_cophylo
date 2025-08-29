@@ -1,0 +1,43 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((c_muricata, ((((((c_lachenalii, c_heleonastes), c_brunnescens), c_chordorrhiza), (c_arenaria, (c_dioica, (c_parallela, c_davalliana)))), c_paniculata), c_echinata)), ((((((((((((c_hirta, (c_riparia, c_lasiocarpa)) ,(c_rostrata, c_vesicaria)), (c_magellanica, c_limosa)), (c_elata, c_bigelowii)), c_globularis), c_capillaris), c_hostiana), c_atrofusca), (c_digitata, c_ornithopoda)), (c_meadii, c_panicea)), ((c_flacca, c_ferruginea), (c_firma, c_sempervirens))), (c_alba, (c_buxbaumii, (c_pilulifera, c_glacialis))))), (((c_rupestris, u_rubra), k_myosuroides), (c_baldensis, c_curvula)));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (((((((a_karii, (a_turfusa, (a_bigelowii, a_pratensis))), (((( a_hostianae, a_buxbaumii), a_lasiocarpae), a_caricis-meadii), a_paniceae)), a_misandrae), (((a_inclusa, a_subinclusa), a_heterospora), a_sempervirentis)), a_limosa), ((((a_irregularis, a_caricis), a_globularis), a_sp2), (((a_vankyi, a_capillaris), (a_rupestris, a_baldensis), a_caciris-albae))), ((a_aspera, a_arenaria), a_sp1)), ((a_elynae, a_curvulae), a_sclerotiformis));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+a_karii: c_echinata,
+a_turfusa: c_heleonastes,
+a_bigelowii: c_bigelowii,
+a_pratensis: c_flacca,
+a_hostianae: c_hostiana,
+a_buxbaumii: c_buxbaumii,
+a_lasiocarpae: c_lasiocarpa,
+a_caricis-meadii: c_panicea,
+a_paniceae: c_meadii,
+a_misandrae: c_atrofusca,
+a_inclusa: c_rostrata,
+a_subinclusa: c_vesicaria,
+a_heterospora: c_elata,
+a_sempervirentis: c_ferruginea,
+a_limosa: c_limosa,
+a_irregularis: c_digitata,
+a_caricis: c_pilulifera,
+a_globularis: c_globularis,
+a_sp2: c_glacialis,
+a_vankyi: c_muricata,
+a_capillaris: c_capillaris,
+a_rupestris: c_rupestris,
+a_baldensis: c_baldensis,
+a_caciris-albae: c_alba,
+a_aspera: c_chordorrhiza,
+a_arenaria: c_arenaria,
+a_sp1: c_davalliana,
+a_curvulae: c_curvula,
+a_elynae: k_myosuroides,
+a_sclerotiformis: u_rubra
+	;
+END;

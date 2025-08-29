@@ -1,0 +1,21 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((((Elisabethiella, Alfonsiella), Allotriozoon), Nigeriella), Courtella), (Ceratosolen, Platyscapa));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((Chlamydodorae1, Platyphylla), Caulocarpae), ((Chlamydodorae2, Crassicostae), Galoglychia)), (Sycomorus, Urostigma));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+Chlamydodorae1: Alfonsiella,
+Platyphylla: Nigeriella,
+Caulocarpae: Courtella,
+Chlamydodorae2: Elisabethiella,
+Crassicostae: Elisabethiella,
+Galoglychia: Allotriozoon,
+Sycomorus: Ceratosolen,
+Urostigma: Platyscapa
+		;
+END;

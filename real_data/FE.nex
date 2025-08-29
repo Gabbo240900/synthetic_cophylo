@@ -1,0 +1,18 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((((Formicinae, Myrmicinae), Ectatomminae), Myrmeciinae), Ponerinae);
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((formicine_parasitoids, PEM_parasitoids), Psilocharitini), Oraseminae), Gollumiellinae);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+formicine_parasitoids : Formicinae,
+PEM_parasitoids : Ectatomminae,
+Psilocharitini : Ponerinae,
+Oraseminae : Myrmeciinae,
+Gollumiellinae : Formicinae
+		;
+END;

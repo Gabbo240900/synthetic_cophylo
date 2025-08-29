@@ -1,0 +1,23 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((((M_sphinx, M_leucophaeus), (P_ursinus, P_cynocephalus)), M_mulatta), (C_patas, C_aethiops)), ((H_sapiens, P_troglodytes), G_gorilla)); 
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((((MISV, MsSV), (PuSV, PcSV)), CpSV), CaSV), MmSV), (GgSV, (HsSV, PtSV)));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+GgSV: G_gorilla,
+PtSV: P_troglodytes,
+HsSV: H_sapiens,
+MmSV: M_mulatta,
+CaSV: C_aethiops,
+CpSV: C_patas,
+PcSV: P_cynocephalus,
+PuSV: P_ursinus,
+MsSV: M_sphinx,
+MISV: M_leucophaeus
+	;
+END;

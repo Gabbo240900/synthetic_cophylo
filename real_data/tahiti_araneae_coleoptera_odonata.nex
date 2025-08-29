@@ -1,0 +1,25 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host1 = (((coi_coleoptera_tahiti_sc02362,(coi_coleoptera_tahiti_sc02826,coi_coleoptera_tahiti_sc02824)),coi_odonata_tahiti_sc02835),(((coi_araneae_tahiti_sc10314,coi_araneae_tahiti_sc10278),coi_araneae_tahiti_sc02148),(coi_araneae_tahiti_sc02721,((coi_araneae_tahiti_sc02763,(coi_araneae_tahiti_sc04248,coi_araneae_tahiti_sc04291)),coi_araneae_tahiti_sc02275))));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Para1 = ((((((((fbpa_araneae_tahiti_sc04291,((fbpa_araneae_tahiti_sc10278,fbpa_araneae_tahiti_sc04248),fbpa_araneae_tahiti_sc02721)),fbpa_araneae_tahiti_sc10314),fbpa_araneae_tahiti_sc02275),fbpa_araneae_tahiti_sc02763),(fbpa_coleoptera_tahiti_sc02826,fbpa_coleoptera_tahiti_sc02824)),fbpa_araneae_tahiti_sc02148),fbpa_odonata_tahiti_sc02835),fbpa_coleoptera_tahiti_sc02362);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+		fbpa_coleoptera_tahiti_sc02362: coi_coleoptera_tahiti_sc02362,
+		fbpa_odonata_tahiti_sc02835: coi_odonata_tahiti_sc02835,
+		fbpa_araneae_tahiti_sc02148: coi_araneae_tahiti_sc02148,
+		fbpa_coleoptera_tahiti_sc02824: coi_coleoptera_tahiti_sc02824,
+		fbpa_coleoptera_tahiti_sc02826: coi_coleoptera_tahiti_sc02826,
+		fbpa_araneae_tahiti_sc02763: coi_araneae_tahiti_sc02763,
+		fbpa_araneae_tahiti_sc02275: coi_araneae_tahiti_sc02275,
+		fbpa_araneae_tahiti_sc10314: coi_araneae_tahiti_sc10314,
+		fbpa_araneae_tahiti_sc02721: coi_araneae_tahiti_sc02721,
+		fbpa_araneae_tahiti_sc04248: coi_araneae_tahiti_sc04248,
+		fbpa_araneae_tahiti_sc10278: coi_araneae_tahiti_sc10278,
+		fbpa_araneae_tahiti_sc04291: coi_araneae_tahiti_sc04291
+	;
+END;

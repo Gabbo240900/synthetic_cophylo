@@ -1,0 +1,29 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((((R_megalotis, R_mexicanus), P_boylii), ((P_maniculatusG, P_maniculatusF), (P_leucopusE, P_leucopusSW))), (((B_obscurus, A_azarae), ((O_longicaudatus, O_chacoensis), O_palustris)), (S_hispidus, S_texensis))); 
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (((((MUL, BCC), BAY), (((BMJ, ORN), AND), (PER, MAC))), ((BRI, BRO), (SNV, (MON, NYV)))), (LSC, (RIOS, EMC)));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+LSC: P_boylii,
+RIOS: R_megalotis,
+EMC: R_mexicanus,
+SNV: P_maniculatusG,
+MON: P_maniculatusF,
+NYV: P_leucopusE,
+BRI: P_leucopusE,
+BRO: P_leucopusSW,
+MAC: B_obscurus,
+PER: A_azarae,
+AND: O_longicaudatus,
+ORN: O_longicaudatus,
+BMJ: O_chacoensis,
+BAY: O_palustris,
+BCC: S_hispidus,
+MUL: S_hispidus
+	;
+END;

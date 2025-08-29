@@ -1,7 +1,7 @@
 # How to run the models 
 
 ## simulate with Alcala model high Switch
-python simulate_input_trees.py --num_trees 100 \
+python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
@@ -16,7 +16,7 @@ host_death = 0.24
 )
 
 ## simulate with Alcala model high Cospeciation
-python simulate_input_trees.py --num_trees 100 \
+python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
@@ -29,8 +29,8 @@ host_birth = 0.7
 host_death = 0.63
 )
 
-## simulate with Alcala model high Cospeciation
-python simulate_input_trees.py --num_trees 10 \
+## simulate with Alcala model medium
+python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
@@ -45,13 +45,13 @@ host_death = 0.45
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## simulate with Coala High switch - it was able to create only 3 trees
-python simulate_input_trees.py --num_trees 1000 \
+## simulate with Coala High switch
+python simulate_input_trees.py --num_trees 5000 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \
 --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
---num_threads 8
+--num_threads 10
 
 (pc = random(0.05,0.1)
 ps = random(0.5, 0.7)
@@ -61,12 +61,12 @@ host_birth = 0.7
 host_death = 0.24)
 
 ## simulate with Coala High cospeciation 
-python simulate_input_trees.py --num_trees 800 \
+python simulate_input_trees.py --num_trees 4000 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \
 --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
---num_threads 8
+--num_threads 10
 
 (pc = random(0.7,1.0)
 ps = random(0, 0.05)
@@ -76,7 +76,7 @@ host_birth = 0.7
 host_death = 0.63)
 
 ## simulate with Coala Medium Values 
-python simulate_input_trees.py --num_trees 500 \
+python simulate_input_trees.py --num_trees 2500 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
 --output_dir_tgl ./generated_trees/Datasets/ \
@@ -98,7 +98,7 @@ python simulate_input_files.py \
   --c_lambda 0.1 0.2 \
   --s_lambda 0.7 0.7 \
   --s_her 1.4 1.7 \
-  --num_trees 100
+  --num_trees 500
 
 (h_mu = 0.24
 s_mu = 0.66
@@ -110,7 +110,7 @@ python simulate_input_files.py \
   --c_lambda 1.4 1.7 \
   --s_lambda 0.7 0.7 \
   --s_her 0 0.05 \
-  --num_trees 100
+  --num_trees 500
 
 (h_mu = 0.63
 s_mu = 0.645
@@ -122,7 +122,7 @@ python simulate_input_files.py \
   --c_lambda 0.5 0.8 \
   --s_lambda 0.7 0.7 \
   --s_her 0.5 0.8 \
-  --num_trees 100
+  --num_trees 500
 
 (h_mu = 0.45
 s_mu = 0.6

@@ -1,0 +1,27 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((((((Allotoca_meeki, Allotoca_diazi), Allotoca_zacapuensis), Allotoca_duguesi), Neoophorus_regalis), ((Zoogoneticus_purhepechus, Zoogoneticus_quitzeoensis), (Alloophorus_robustus, Chapalicthys_pardalis))), (((Ilyodon_whitei, Ilyodon_furcidens), Xenotaenia_resolanae), Allodontichthys_zonistius)), Characodon_audax);
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((((((La_Luz_Spring, Mintzita_Spring), Rico_Spring), Chapultepec_Spring), Zacapu_Lake), Opopeo_Lake), (((Abraham_Gonzalez_Spring, Guadalupe_Aguilera_Spring), El_Toboso_Spring), Pino_Suarez_Spring)), ((Tlapetlahuaya_Spring, Tocumbo_Spring), Ahuacapan_Spring)), Margotrema_resolanae);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+Opopeo_Lake: Allotoca_meeki,
+Zacapu_Lake: Allotoca_zacapuensis,
+Chapultepec_Spring: Allotoca_diazi,
+Rico_Spring: Neoophorus_regalis,
+La_Luz_Spring: Zoogoneticus_purhepechus,
+Mintzita_Spring: Zoogoneticus_quitzeoensis,
+Abraham_Gonzalez_Spring: Characodon_audax,
+Guadalupe_Aguilera_Spring: Characodon_audax,
+El_Toboso_Spring: Characodon_audax,
+Pino_Suarez_Spring: Characodon_audax,
+Tlapetlahuaya_Spring: Ilyodon_whitei,
+Tocumbo_Spring: Chapalicthys_pardalis,
+Ahuacapan_Spring: Allodontichthys_zonistius,
+Margotrema_resolanae: Xenotaenia_resolanae
+		;
+END;

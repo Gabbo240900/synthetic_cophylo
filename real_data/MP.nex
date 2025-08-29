@@ -1,0 +1,22 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (Manica,((formosae,(arisana,(ruginodis,rubra))),((schencki,(sulcinodis,lobicornis)),(rugulosa,((specioides,hellenica),(vandeli,(scabrinodis,sabuleti)))))));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (Phengaris_daitozana, (Phengaris_atroguttata,((alcon,rebeli),((arion,arionides),(teleius,nausithous)))));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+		Phengaris_daitozana: formosae,
+		Phengaris_atroguttata: arisana,
+		rebeli: schencki,
+		alcon: ruginodis,
+		arionides: rubra,
+		arion: sabuleti,
+		nausithous: rubra,
+		teleius: rubra
+	;
+END;
+

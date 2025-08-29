@@ -1,0 +1,42 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (Tylochromis_intermedius, (((Oreochromis_niloticus, Sarotherodon_galilaeus), Tilapia_guineensis), (Hemichromis_fasciatus, Hemichromis_letourneuxi)));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (((((((Cichlidogyrus_halli2, Cichlidogyrus_halli1), ((Cichlidogyrus_tiberianus, Cichlidogyrus_cubitus), ((Cichlidogyrus_douellouae, Cichlidogyrus_ergensi), ((((Cichlidogyrus_agnesi, Cichlidogyrus_gallus), Cichlidogyrus_flexicolpos), (Cichlidogyrus_thurstonae, Cichlidogyrus_bilongi)), Cichlidogyrus_aegypticus)))), (((Cichlidogyrus_cirratus, Cichlidogyrus_njinei), (Cichlidogyrus_acerbus, Cichlidogyrus_sp2)), (((Cichlidogyrus_digitatus, Cichlidogyrus_arthracanthus), Cichlidogyrus_yanni), (((Scutogyrus_longicornis, Scutogyrus_bailloni), Scutogyrus_minus), Cichlidogyrus_tilapiae)))), ((Cichlidogyrus_longicirrus, Cichlidogyrus_sp1), Cichlidogyrus_falcifer)), Cichlidogyrus_amphoratus), Cichlidogyrus_sclerosus), Cichlidogyrus_pouyaudi);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+Cichlidogyrus_halli2: Oreochromis_niloticus,
+Cichlidogyrus_halli1: Sarotherodon_galilaeus,
+Cichlidogyrus_tiberianus: Tilapia_guineensis,
+Cichlidogyrus_cubitus: Tilapia_guineensis,
+Cichlidogyrus_douellouae: Sarotherodon_galilaeus,
+Cichlidogyrus_ergensi: Tilapia_guineensis,
+Cichlidogyrus_agnesi: Tilapia_guineensis,
+Cichlidogyrus_gallus: Tilapia_guineensis,
+Cichlidogyrus_flexicolpos: Tilapia_guineensis,
+Cichlidogyrus_thurstonae: Oreochromis_niloticus,
+Cichlidogyrus_bilongi: Tilapia_guineensis,
+Cichlidogyrus_aegypticus: Tilapia_guineensis,
+Cichlidogyrus_cirratus: Oreochromis_niloticus,
+Cichlidogyrus_njinei: Sarotherodon_galilaeus,
+Cichlidogyrus_acerbus: Sarotherodon_galilaeus,
+Cichlidogyrus_sp2: Sarotherodon_galilaeus,
+Cichlidogyrus_digitatus: Tilapia_guineensis,
+Cichlidogyrus_arthracanthus: Tilapia_guineensis,
+Cichlidogyrus_yanni: Tilapia_guineensis,
+Scutogyrus_longicornis: Oreochromis_niloticus,
+Scutogyrus_bailloni: Sarotherodon_galilaeus,
+Scutogyrus_minus: Oreochromis_niloticus,
+Cichlidogyrus_tilapiae: Oreochromis_niloticus,
+Cichlidogyrus_longicirrus: Hemichromis_fasciatus,
+Cichlidogyrus_sp1: Hemichromis_letourneuxi,
+Cichlidogyrus_falcifer: Hemichromis_fasciatus,
+Cichlidogyrus_amphoratus: Tilapia_guineensis,
+Cichlidogyrus_sclerosus: Oreochromis_niloticus,
+Cichlidogyrus_pouyaudi: Tylochromis_intermedius
+	;
+END;

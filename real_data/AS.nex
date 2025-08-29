@@ -1,0 +1,29 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((((Chipping_Sparrow, (((Y_headed_Blackbird, Brewer_Blackbird), Bullock_Oriole), (Y_rumped_Warbler, Grace_Warbler))), (Indigo_Bunting, B_headed_Grosbeak)), ((American_Robin, Western_Bluebird), ((Brown_Creeper, Bg_Gnatcatcher), W_breasted_Nuthatch))), (((Western_Kingbird, Scissor_tailed_Flycatcher), (Ash_throated_Flycatcher, Great_crested_Flycatcher)), (Gray_Flycatcher, Hammond_Flycatcher)));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((((((S_sittae, S_polioptilus), S_certhiae), S_dendroicae_A), S_dendroicae_B), S_sp_D), (S_sp_F, (S_sp_E, S_elongatus))), (S_passerinae, (S_sp_C, (S_tyranni_A, S_tyranni_B)))),(S_empidonax, (S_turdus, S_sialiae)));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+S_sittae:  W_breasted_Nuthatch,
+S_polioptilus: Bg_Gnatcatcher,
+S_certhiae: Brown_Creeper,
+S_dendroicae_A: Grace_Warbler,
+S_dendroicae_B: Grace_Warbler,
+S_sp_D: Chipping_Sparrow,
+S_sp_F: Bullock_Oriole,
+S_sp_E: Y_headed_Blackbird,
+S_elongatus: Brewer_Blackbird,
+S_passerinae: Indigo_Bunting,
+S_sp_C: B_headed_Grosbeak,
+S_tyranni_A: Western_Kingbird,
+S_tyranni_B: Ash_throated_Flycatcher,
+S_empidonax: Gray_Flycatcher,
+S_turdus: American_Robin,
+S_sialiae: Western_Bluebird 		
+	;
+END;

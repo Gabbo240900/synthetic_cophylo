@@ -1,0 +1,35 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (((((((((T_denotata_ha_Ma, T_denotata_hb_Ma), T_swezeyi_Ma), T_swezeyi_Ka), ((Ph_vittipennis_Mo, Ph_newsp_Ka), (T_crassipes_ha_Ma, T_crassipes_hb_Ma))), ((((T_joycei_Ma, T_joycei_Mo), T_joycei_Ka), T_waikamoi_Ma), ((T_pantostica_hb_Ha, T_pantostica_ha_Ha), (T_pohakuloa_Ha, T_perkinsi_Ka)))), (((T_dubautiae_Ma, T_dubautiae_Oa), T_dubautiae_Ka), (((T_arboreae_ha_Ha, T_arboreae_hb_Ha), T_cratericola_Ma), T_beardsleyi_Ma))), T_artemisiae_Ma), T_stellata), T_amoena)  ; 
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite =((((((((1, 2), (3, 4)), (5, 6)), (7, (8, 9))), (10, 11)), (((12, 13), 14), (15, (16, 17)))), (18, (19, 20))), (21, 22));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+1: T_joycei_Ma,
+2: T_joycei_Mo,
+3: T_pantostica_hb_Ha,
+4: T_pantostica_ha_Ha,
+5: T_joycei_Ka,
+6: T_pohakuloa_Ha,
+7: T_waikamoi_Ma,
+8: Ph_vittipennis_Mo,
+9: Ph_newsp_Ka,
+10: T_perkinsi_Ka,
+11: T_artemisiae_Ma,
+12: T_arboreae_ha_Ha,
+13: T_cratericola_Ma,
+14: T_beardsleyi_Ma,
+15: T_dubautiae_Ma,
+16: T_dubautiae_Oa,
+17: T_dubautiae_Ka,
+18: T_denotata_ha_Ma,
+19: T_swezeyi_Ma,
+20: T_swezeyi_Ka,
+21: T_stellata,
+22: T_amoena
+	;
+END;

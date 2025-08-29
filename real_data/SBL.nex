@@ -1,0 +1,22 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (Spotted_Shag,((Adelie_Penguin,(Little_Blue_Penguin,(Fiordland_Crested_Penguin, Yellow-eyed_Penguin))),((Royal_Albatros,Buller_Mollymawk),(((Mottled_Petrel,Cook_Petrel),(Westland_Petrel,(Sooty_Shearwather,Hutton_Shearwater))),((Broad-billed_Prion,Fairy_Prion),Common_Diving_Petrel)))));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (Pectinopygus,(Docophoroides,((Austrogonoides,Episbates),(((Naubates,Harrisoniella),Pelmatocerandra),Trabeculus))));
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+		Pectinopygus: Spotted_Shag,
+		Docophoroides: Buller_Mollymawk,
+		Austrogonoides: Adelie_Penguin ,
+		Episbates: Royal_Albatros,
+		Naubates: Broad-billed_Prion,
+		Harrisoniella: Buller_Mollymawk,
+		Pelmatocerandra: Common_Diving_Petrel,
+		Trabeculus: Mottled_Petrel
+	;
+END;
+

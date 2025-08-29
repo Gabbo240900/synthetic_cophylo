@@ -1,0 +1,22 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((((Cottus, Dasycottus), (Neophrinichthys, Psychrolutes)), (Myoxocephalus, Cottunculus)), (Sebastes, Congiopodus)); 
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = (((((C_yanezi, C_cotunculi), C_triventricosus), (((C_pinguis, C_multituberculatus), C_irregularis), C_tuberculatus)), C_nodosus), C_distortus);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+C_yanezi: Neophrinichthys,
+C_cotunculi: Cottunculus,
+C_triventricosus: Sebastes,
+C_pinguis: Sebastes,
+C_multituberculatus: Dasycottus,
+C_irregularis: Myoxocephalus,
+C_tuberculatus: Congiopodus,
+C_nodosus: Sebastes,
+C_distortus: Cottus
+	;
+END;

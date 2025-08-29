@@ -1,0 +1,18 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = ((R_tucanus, ((R_vitellinus, R_ariel_SEBrazil), R_sulfuratus)), P_inscriptus) ; 
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((A_cancellosus4, A_cancellosus5), A_cancellosus6), A_cancellosus1), A_cancellosus3);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+A_cancellosus1 : R_tucanus,
+A_cancellosus3 : P_inscriptus,
+A_cancellosus4 : R_sulfuratus,
+A_cancellosus5 : R_ariel_SEBrazil,
+A_cancellosus6 : R_vitellinus
+	;
+END;

@@ -51,13 +51,13 @@ class GenerateHostTree:
         os.makedirs(parasite_folder, exist_ok=True)
         output_prefix = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}")
         distrib_path = os.path.join(base_path, f"host_tree_{host_tree_index}_distrib.txt")
-        s = random.uniform(0.2, 0.4)
-        c = random.uniform(0.2, 0.4)
+        s = random.uniform(0.5, 0.7)
+        c = random.uniform(0.05, 0.1)
 
         cmd = [
             "/Users/gabriele/Alcala-python/software/bin/cophylo.out",
             "-l", "0.7",
-            "-m", "0.6",
+            "-m", "0.66",
             '-c', str(c),
             '-s', str(s),
             "-t", str(self.tmrca),
@@ -91,7 +91,7 @@ class GenerateHostTree:
     def generate_random_tree(self, num_leaves, prefix="H"):
         """Generates a host tree using a birth-death process with given number of leaves."""
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.45, num_extant_tips=num_leaves)
+        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.24, num_extant_tips=num_leaves)
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
         tmp_file.close()
 

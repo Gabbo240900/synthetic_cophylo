@@ -1,0 +1,33 @@
+#NEXUS
+BEGIN HOST;
+	TREE * Host = (A_burtoni,((T_duboisi,(T_moorii,T_brichardi)),((((P_famula,(P_fasciolatus,I_loocki)),(PT_ephippium,(P_polyodon,P_macrognathus))),((((G_pfefferi,C_horei),(P_curvifrons,(P_marginatus,(SP_babaulti,NP_babaulti)))),L_dardenni),S_diagramma)),L_labiatus)));
+ENDBLOCK;
+
+BEGIN PARASITE;
+	TREE * Parasite = ((((((P_fasciolatus-001,I_loocki-001),(P_polyodon-003,P_macrognathus-002)),PT_ephippium-001),(((((L_dardenni-001,S_diagramma-001),G_pfefferi-001),(SP_babaulti-001,(C_horei-001,(P_curvifrons-001,(NP_babaulti-001,P_marginatus-001))))),((T_duboisi-001,T_brichardi-001),T_moorii-001)),L_labiatus-001)),P_famula-001),A_burtoni-001);
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+	RANGE
+		I_loocki-001: I_loocki,
+		P_fasciolatus-001: P_fasciolatus,
+		P_polyodon-003: P_polyodon,
+		P_macrognathus-002: P_macrognathus,
+		P_curvifrons-001: P_curvifrons,
+		P_famula-001: P_famula,
+		P_marginatus-001: P_marginatus,
+		PT_ephippium-001: PT_ephippium,
+		L_dardenni-001: L_dardenni,
+		L_labiatus-001: L_labiatus,
+		S_diagramma-001: S_diagramma,
+		SP_babaulti-001: SP_babaulti,
+		G_pfefferi-001: G_pfefferi,
+		C_horei-001: C_horei,
+		NP_babaulti-001: NP_babaulti,
+		T_duboisi-001: T_duboisi,
+		T_brichardi-001: T_brichardi,
+		T_moorii-001: T_moorii,
+		A_burtoni-001: A_burtoni
+	;
+END;
+
