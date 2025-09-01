@@ -60,7 +60,7 @@ pl = 100-pc-ps-pd
 host_birth = 0.7
 host_death = 0.24)
 
-## simulate with Coala High cospeciation 
+## simulate with Coala High cospeciation - rivediamo 
 python simulate_input_trees.py --num_trees 4000 \
 --min_leaves 15 --max_leaves 50 \
 --output_dir ./generated_trees/ \
@@ -70,8 +70,8 @@ python simulate_input_trees.py --num_trees 4000 \
 
 (pc = random(0.7,1.0)
 ps = random(0, 0.05)
-pd = random.dirichlet * (1 - pc -ps) 
-pl = 100-pc-ps-pd
+pd,pl = random.dirichlet * (1 - pc -ps) 
+
 host_birth = 0.7
 host_death = 0.63)
 
