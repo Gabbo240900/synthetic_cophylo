@@ -1,0 +1,3 @@
+Speciation: 118
+Loss: 10
+Duplication: 11

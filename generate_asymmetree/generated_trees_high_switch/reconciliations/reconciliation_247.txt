@@ -1,0 +1,4 @@
+Loss: 342
+Speciation: 2023
+Horizontal Gene Transfer: 1069
+Duplication: 349
