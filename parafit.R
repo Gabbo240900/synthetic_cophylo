@@ -3,7 +3,7 @@ library(ape)
 library(ade4)
 
 # Function to compute ParaFit from file paths
-compute_parafit <- function(host_tree_path, parasite_tree_path, association_path, nperm = 999) {
+compute_parafit <- function(host_tree_path, parasite_tree_path, association_path, nperm = 500) {
   # Read trees
   host_tree <- read.tree(host_tree_path)
   parasite_tree <- read.tree(parasite_tree_path)
@@ -49,8 +49,8 @@ compute_parafit <- function(host_tree_path, parasite_tree_path, association_path
     return(NULL)
     }
 
-    # Run ParaFit
-    result <- parafit(D_host, D_parasite, assoc_matrix, nperm = nperm, test = TRUE)
+    # Run ParaFit with Lingoes correction for negative eigenvalues
+    result <- parafit(D_host, D_parasite, assoc_matrix, nperm = nperm, test = TRUE, correction = "lingoes")
 
     # Print main stats
     cat("ParaFit Global Stat:", result$ParaFitGlobal, "\n")
@@ -64,6 +64,6 @@ if (length(args) >= 3) {
   host_tree_path <- args[1]
   parasite_tree_path <- args[2]
   association_path <- args[3]
-  nperm <- ifelse(length(args) >= 4, as.numeric(args[4]), 999)
+  nperm <- ifelse(length(args) >= 4, as.numeric(args[4]), 500)
   compute_parafit(host_tree_path, parasite_tree_path, association_path, nperm)
 }

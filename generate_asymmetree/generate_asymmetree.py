@@ -30,13 +30,13 @@ event_name_map = {
 
 for i in range(500):
     num_leaves = random.randint(15, 50)
-    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.45)
+    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.24)
     #DECIDE HOW WE CHOOSE DUPLICATION AND LOSS RATES. 
-    hgt_rate = random.uniform(0.5, 0.8)
+    hgt_rate = random.uniform(1.4, 1.7)
     g = te.dated_gene_tree(s, dupl_rate=0.5, loss_rate=0.5, hgt_rate=hgt_rate) 
     s_nwk = to_newick(s)
     g_nwk = to_newick(g)
-    s_nwk = species_pattern.sub(lambda m: f"H{m.group(1)}:", s_nwk)
+    s_nwk = re.sub(r'(?<=[(,)])(?!(H))(\d+):', r'H\2:', s_nwk)
     g_nwk = gene_pattern.sub(lambda m: f"P{m.group(1)}", g_nwk)
     g_nwk = assoc_pattern.sub(lambda m: "<" + re.sub(r'\d+', lambda n: "H" + n.group(0), m.group(1)) + ">", g_nwk)
     s_path = f"{base_path}/species_trees/species_tree_{i+1}.nwk"
