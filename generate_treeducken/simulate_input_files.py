@@ -123,7 +123,7 @@ def main():
 
     args = parser.parse_args()
 
-    time_grid = [1.5]
+    time_grid = [2.5]
     sim_index = 1
 
     for _ in tqdm(range(args.num_trees), desc="Simulating parameter sets"):
