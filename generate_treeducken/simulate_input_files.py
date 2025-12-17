@@ -70,11 +70,8 @@ class GenerateTGLFiles:
         # Normalize event counts to proportions
         event_keys = [
             "Cospeciations",
-            "Host_Speciations",
-            "Host_Extinctions",
-            "Symbiont_Speciations",
-            "Symbiont_Extinctions",
-            "Host_Spread/Switches"
+            "Host_Spread/Switches",
+            "Symbiont_Speciations"
         ]
         total_events = summary_df[event_keys].sum()
         for key in event_keys:
@@ -123,7 +120,7 @@ def main():
 
     args = parser.parse_args()
 
-    time_grid = [2.5]
+    time_grid = [2]
     sim_index = 1
 
     for _ in tqdm(range(args.num_trees), desc="Simulating parameter sets"):

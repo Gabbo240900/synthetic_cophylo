@@ -95,7 +95,7 @@ host_death = 0.45)
 ## Simulate with treeducken high_switch
 python simulate_input_files.py \
   --h_lambda 0.7 0.7 \
-  --c_lambda 0.1 0.2 \
+  --c_lambda 0 0.05 \
   --s_lambda 0.7 0.7 \
   --s_her 1.4 1.7 \
   --num_trees 500

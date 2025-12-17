@@ -1,32 +1,42 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:1.505159898,(H2:0.2942541706,H3:0.2942541706):1.210905727):0.494840102;;
+    TREE * Host1 = (H1:1.230431044,(H2:0.3882514102,(H3:0.264594874,(H4:0.02741755551,H5:0.02741755551):0.2371773185):0.1236565362):0.8421796342):0.7695689556;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (P1:0.7251849919,(P2:0.7017834539,(P3:0.0252643913,P4:0.0252643913):0.6765190626):0.7632349049):0.5349816412;;
+    TREE * Para1 = (P1:0.1470409916,(((P3:0.7022993724,P4:0.01225736787):0.04042435374,P2:0.01700688511):0.6871520558,(((((P19:0.0414090801,P20:0.0414090801):0.1343578659,(P14:0.1060290544,(P15:0.05986276235,P16:0.05986276235):0.04616629204):0.0697378916):0.06141414566,(P7:0.2211684497,(P8:0.06428586541,P9:0.1964615299):0.02470691983):0.01601264191):0.05152540957,(((P12:0.01307481292,P13:0.1074498973):0.01708886772,P11:0.124538765):0.1636870608,P6:0.2882258258):0.0004806754059):0.4533103451,(((P17:0.05779072429,P18:0.05779072429):0.1228435091,P10:0.1806342334):0.2712948309,P5:0.3743307547):0.290087782):0.6878589356):0.5102148645):0.05990935363;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P2: H2
-		P2: H3
 		P3: H3
-		P4: H2
+		P6: H2
+		P7: H2
+		P9: H2
+		P10: H1
+		P11: H2
+		P13: H1
+		P14: H1
+		P15: H1
+		P16: H2
+		P17: H1
+		P18: H1
+		P19: H1
+		P20: H1
     ;
 END;
 
-Cospeciations                NaN
-Host_Speciations        0.400000
-Host_Extinctions             NaN
-Symbiont_Speciations    0.200000
-Symbiont_Extinctions    0.200000
-Host_Spread/Switches    0.200000
-Dispersals                   NaN
-Extirpations                 NaN
-Parafit_Stat            0.873104
-Parafit_P-value         0.350000
-Host_num_leaves         3.000000
-Parasite_num_leaves     4.000000
-Sim_time                2.000000
-Total Events            5.000000
+Cospeciations                 NaN
+Host_Speciations         4.000000
+Host_Extinctions              NaN
+Symbiont_Speciations     0.333333
+Symbiont_Extinctions     6.000000
+Host_Spread/Switches     0.666667
+Dispersals                    NaN
+Extirpations                  NaN
+Parafit_Stat             6.680407
+Parafit_P-value          0.480000
+Host_num_leaves          5.000000
+Parasite_num_leaves     20.000000
+Sim_time                 2.000000
+Total Events            15.000000

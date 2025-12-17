@@ -1,40 +1,35 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = ((H2:1.112435324,(H3:0.3272005174,H4:0.3272005174):0.785234807):0.5310985235,H1:0.07834210752):0.3564661521;;
+    TREE * Host1 = (H1:1.468491964,((H2:0.3890450549,(H3:0.3190499133,H4:0.3190499133):0.06999514158):0.6666583262,(H5:0.318327958,H6:0.318327958):0.7373754231):0.4127885829):0.531508036;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (P1:0.3707857789,((((P5:0.08705766074,P6:0.1259908806):0.198778388,((P9:0.2447389917,P10:0.2447389917):0.228099942,((P7:0.3202309426,P8:0.3202309426):0.0943081333,P4:0.4145390759):0.05829985782):0.09547279399):1.07522212,P3:0.07834210752):0.2839313487,P2:0.3622734562):0.008512322652):0.06402248069;;
+    TREE * Para1 = ((((P7:0.05384269893,P8:0.1152633516):0.6647870383,((P9:0.02681632327,P10:0.02681632327):0.3855148588,(P5:0.2589053903,P6:0.2589053903):0.1534257917):0.3677192079):0.6629923823,P2:0.2594556152):0.2541750971,(P1:0.0314341901,(P3:0.3253317492,P4:0.317268779):0.3181354193):0.216845634):0.3027821308;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P4: H2
-		P4: H3
-		P4: H4
-		P7: H2
-		P7: H3
-		P8: H2
-		P9: H2
-		P9: H3
-		P9: H4
+		P5: H2
+		P5: H4
+		P6: H1
+		P8: H1
+		P8: H6
+		P9: H1
 		P10: H2
-		P10: H3
-		P10: H4
     ;
 END;
 
-Cospeciations            0.058824
-Host_Speciations         0.117647
-Host_Extinctions         0.058824
-Symbiont_Speciations     0.411765
-Symbiont_Extinctions     0.294118
-Host_Spread/Switches     0.058824
+Cospeciations                 NaN
+Host_Speciations         5.000000
+Host_Extinctions              NaN
+Symbiont_Speciations     0.555556
+Symbiont_Extinctions     5.000000
+Host_Spread/Switches     0.444444
 Dispersals                    NaN
 Extirpations                  NaN
-Parafit_Stat             0.622576
-Parafit_P-value          0.080000
-Host_num_leaves          4.000000
+Parafit_Stat             3.540867
+Parafit_P-value          0.480000
+Host_num_leaves          6.000000
 Parasite_num_leaves     10.000000
 Sim_time                 2.000000
-Total Events            17.000000
+Total Events             9.000000

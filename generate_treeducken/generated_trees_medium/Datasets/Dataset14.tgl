@@ -1,34 +1,36 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (((H3:0.02318292518,H4:0.02318292518):0.07704173605,H2:0.1002246612):1.60841037,H1:0.3364506962):0.2913649689;;
+    TREE * Host1 = ((((H4:0.13086976,H5:0.13086976):0.3779755723,H3:0.5088453323):0.6119433601,H2:0.5879216708):0.1185480276,H1:0.1315525048):0.7606632799;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (P1:0.5008124313,((((P7:0.07710247292,P8:0.09590463907):0.213015501,P4:0.30892014):0.9024524983,(P3:0.1303203613,(P5:0.1002246612,P6:0.1002246612):0.5591388051):0.552009172):0.4972623927,P2:0.1868010186):0.1643617351):0.1270032338;;
+    TREE * Para1 = (((((P5:0.02771883429,P6:0.5879216708):0.02118119505,(P8:0.2756952241,P9:0.2756952241):0.8662746634):0.05830107214,((P10:0.2168541544,P11:0.2168541544):0.6552208265,P7:0.232318171):0.3281959788):0.6710864275,(P1:1.455302068,P2:0.9224350462):0.4160553194):0.02416006676,(P3:0.06043461879,P4:0.1315525048):0.6561807339):0.104482546;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P4: H2
-		P5: H3
-		P5: H4
-		P6: H2
+		P1: H3
+		P1: H4
+		P1: H5
 		P8: H3
-		P8: H4
+		P9: H3
+		P10: H4
+		P10: H5
+		P11: H5
     ;
 END;
 
-Cospeciations           1.666667e-01
-Host_Speciations        8.333333e-02
-Host_Extinctions        8.333333e-02
-Symbiont_Speciations    3.333333e-01
-Symbiont_Extinctions    3.333333e-01
-Host_Spread/Switches             NaN
-Dispersals                       NaN
-Extirpations                     NaN
-Parafit_Stat            1.164069e-35
-Parafit_P-value         9.900000e-01
-Host_num_leaves         4.000000e+00
-Parasite_num_leaves     8.000000e+00
-Sim_time                2.000000e+00
-Total Events            1.200000e+01
+Cospeciations            0.222222
+Host_Speciations         2.000000
+Host_Extinctions         2.000000
+Symbiont_Speciations     0.555556
+Symbiont_Extinctions     6.000000
+Host_Spread/Switches     0.222222
+Dispersals                    NaN
+Extirpations                  NaN
+Parafit_Stat             0.075710
+Parafit_P-value          1.000000
+Host_num_leaves          5.000000
+Parasite_num_leaves     11.000000
+Sim_time                 2.000000
+Total Events             9.000000

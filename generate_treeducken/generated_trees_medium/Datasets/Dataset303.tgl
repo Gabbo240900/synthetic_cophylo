@@ -1,32 +1,31 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:0.904648693,((H3:0.04225794603,H4:0.04225794603):0.6842248422,H2:0.004981288186):0.284787314):0.9887298977;;
+    TREE * Host1 = (((H9:0.01240831363,H10:0.01240831363):0.9933128895,((H4:0.5056984229,H5:0.5056984229):0.1939858122,H3:0.6996842352):0.3060369679):0.22874112,(H1:0.08774859156,(H2:0.05359212152,((H7:0.1098990136,H8:0.1098990136):0.1993660221,H6:0.3092650356):0.4103031201):0.24354169):0.2713524774):0.7655376769;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = ((P2:0.904648693,(P5:0.5641872532,P6:0.6930227299):0.3182473724):0.2822791433,((P3:0.6930273028,P4:0.6930273028):0.3330013235,P1:0.2281527374):0.2675206192):0.7064507544;;
+    TREE * Para1 = (P1:1.176901514,((((P8:0.01240831363,P9:0.01240831363):0.5824931096,P4:0.2955004489):0.273473335,(P3:0.09617345553,(P5:0.527491741,(P6:0.2257454748,P7:0.3092650356):0.218670768):0.1198786122):0.2205603424):0.09473508746,P2:0.4833638969):0.7791994726):0.2576906817;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P3: H3
-		P3: H4
-		P4: H3
-		P6: H4
+		P7: H6
+		P8: H9
+		P9: H10
     ;
 END;
 
-Cospeciations            0.083333
-Host_Speciations         0.166667
-Host_Extinctions         0.166667
-Symbiont_Speciations     0.250000
-Symbiont_Extinctions     0.250000
-Host_Spread/Switches     0.083333
-Dispersals                    NaN
-Extirpations                  NaN
-Parafit_Stat                  NaN
-Parafit_P-value               NaN
-Host_num_leaves          4.000000
-Parasite_num_leaves      6.000000
-Sim_time                 2.000000
-Total Events            12.000000
+Cospeciations            0.375
+Host_Speciations         6.000
+Host_Extinctions         2.000
+Symbiont_Speciations     0.500
+Symbiont_Extinctions     6.000
+Host_Spread/Switches     0.125
+Dispersals                 NaN
+Extirpations               NaN
+Parafit_Stat               NaN
+Parafit_P-value            NaN
+Host_num_leaves         10.000
+Parasite_num_leaves      9.000
+Sim_time                 2.000
+Total Events             8.000

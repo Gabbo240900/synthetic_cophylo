@@ -1,31 +1,31 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = ((((H5:0.3991471391,H6:0.1362602875):0.3951805308,H3:0.2193202223):0.02879388243,((H8:0.2298889744,(H11:0.03141188783,H12:0.03141188783):0.1984770866):0.5871804055,((H4:0.2996474332,(H7:0.1477076498,(H9:0.1195334186,H10:0.1195334186):0.1116533968):0.4872927023):0.08609065673,H2:0.6548289521):0.01249920556):0.006052172372):0.6439109863,H1:0.1081045304):0.5329674614;;
+    TREE * Host1 = ((H1:0.1433674588,H2:0.2206630783):0.02028698526,(H3:0.198782456,H4:0.198782456):1.242268688):0.558948856;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (((P3:0.3991471391,P4:0.1362602875):0.3951805308,P1:0.2193202223):0.02879388243,((P7:0.2298889744,(P8:0.03141188783,P9:0.01888369549):0.1984770866):0.5871804055,(P2:0.1950864769,(P5:0.1477076498,P6:0.212191896):0.4872927023):0.09858986229):0.006052172372):1.176878448;;
+    TREE * Para1 = ((P1:0.1433674588,P2:0.2206630783):0.02028698526,((P4:0.198782456,P5:0.198782456):0.01025109931,P3:0.2090335553):1.232017589):0.558948856;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P3: H5
-		P7: H8
-		P8: H11
+		P3: H3
+		P4: H3
+		P5: H4
     ;
 END;
 
-Cospeciations            0.347826
-Host_Speciations         0.130435
-Host_Extinctions         0.260870
-Symbiont_Speciations          NaN
-Symbiont_Extinctions     0.260870
-Host_Spread/Switches          NaN
-Dispersals                    NaN
-Extirpations                  NaN
-Parafit_Stat             1.085812
-Parafit_P-value          0.250000
-Host_num_leaves         12.000000
-Parasite_num_leaves      9.000000
-Sim_time                 2.000000
-Total Events            23.000000
+Cospeciations           0.75
+Host_Speciations         NaN
+Host_Extinctions        2.00
+Symbiont_Speciations    0.25
+Symbiont_Extinctions    2.00
+Host_Spread/Switches     NaN
+Dispersals               NaN
+Extirpations             NaN
+Parafit_Stat             NaN
+Parafit_P-value          NaN
+Host_num_leaves         4.00
+Parasite_num_leaves     5.00
+Sim_time                2.00
+Total Events            4.00

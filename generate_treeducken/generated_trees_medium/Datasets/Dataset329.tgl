@@ -1,34 +1,42 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:0.6779513907,(H2:0.9273997708,H3:0.9273997708):0.8026229559):0.2699772733;;
+    TREE * Host1 = (H1:1.226026679,(((H5:0.02246760355,H6:0.08050030489):0.005489458804,H4:0.08598976369):0.9354115232,(H2:0.4557188134,H3:0.4557188134):0.5656824735):0.204625392):0.773973321;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = ((P2:0.6779513907,((P4:0.4440939773,(P5:0.003985047477,P6:0.003985047477):0.4401089298):0.9358035032,P3:0.273284071):0.3501252462):0.2197960143,P1:0.5505896989):0.05018125901;;
+    TREE * Para1 = (((P3:0.9414844283,(P4:0.8047233123,P5:0.8047233123):0.136761116):0.2845422507,((((P7:0.1176166264,P8:0.2994670487):0.5342635642,((P10:0.02246760355,P11:0.08050030489):0.005489458804,P9:0.08598976369):0.7477408491):0.1876706741,((P12:0.0448331219,P13:0.0448331219):0.3362790894,P6:0.3811122113):0.6402890756):0.1208088421,P2:0.1413614521):0.08381654999):0.3305398633,P1:0.2237194462):0.4434334577;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P4: H2
-		P4: H3
-		P5: H2
-		P5: H3
+		P3: H1
+		P4: H1
+		P5: H1
+		P5: H6
 		P6: H2
 		P6: H3
+		P8: H4
+		P9: H4
+		P11: H6
+		P12: H2
+		P12: H3
+		P13: H1
+		P13: H2
+		P13: H3
     ;
 END;
 
-Cospeciations            0.1
-Host_Speciations         0.1
-Host_Extinctions         0.1
-Symbiont_Speciations     0.4
-Symbiont_Extinctions     0.3
-Host_Spread/Switches     NaN
-Dispersals               NaN
-Extirpations             NaN
-Parafit_Stat             NaN
-Parafit_P-value          NaN
-Host_num_leaves          3.0
-Parasite_num_leaves      6.0
-Sim_time                 2.0
-Total Events            10.0
+Cospeciations            0.444444
+Host_Speciations         1.000000
+Host_Extinctions         1.000000
+Symbiont_Speciations     0.555556
+Symbiont_Extinctions     4.000000
+Host_Spread/Switches          NaN
+Dispersals                    NaN
+Extirpations                  NaN
+Parafit_Stat            16.176522
+Parafit_P-value          0.200000
+Host_num_leaves          6.000000
+Parasite_num_leaves     13.000000
+Sim_time                 2.000000
+Total Events             9.000000

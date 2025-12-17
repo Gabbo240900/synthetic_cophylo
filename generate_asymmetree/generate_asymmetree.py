@@ -30,9 +30,9 @@ event_name_map = {
 
 for i in range(500):
     num_leaves = random.randint(15, 50)
-    s = te.species_tree_n_age(n=num_leaves, age=1.5, birth_rate=0.7, death_rate=0.45)
+    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.63)
     #DECIDE HOW WE CHOOSE DUPLICATION AND LOSS RATES. 
-    hgt_rate = random.uniform(0.5, 0.8)
+    hgt_rate = random.uniform(0, 0.05)
     g = te.dated_gene_tree(s, dupl_rate=0.5, loss_rate=0.5, hgt_rate=hgt_rate) 
     s_nwk = to_newick(s)
     g_nwk = to_newick(g)
@@ -69,11 +69,17 @@ for i in range(500):
         for node in g.postorder()
         if getattr(node, "event", None)
     )
+    gene_leaf_count = sum(1 for _ in g.leaves())
+    speciation_events = event_counts.get("S", 0)
+    adjusted_speciation = speciation_events - gene_leaf_count
     rec_path = f"{base_path}/reconciliations/reconciliation_{i+1}.txt"
     with open(rec_path, "w") as f:
         for event, count in event_counts.items():
             long_name = event_name_map.get(event, event)
-            f.write(f"{long_name}: {count}\n")
+            if event == "S":
+                f.write(f"Speciation: {adjusted_speciation}\n")
+            else:
+                f.write(f"{long_name}: {count}\n")
     
     dataset_path = f"{base_path}/Datasets/Dataset{i+1}.tgl"
     with open(dataset_path, "w") as f:
@@ -99,6 +105,9 @@ for i in range(500):
         # Reconciliation block
         for event, count in event_counts.items():
             long_name = event_name_map.get(event, event)
-            f.write(f"{long_name}: {count}\n")
+            if event == "S":
+                f.write(f"Speciation: {adjusted_speciation}\n")
+            else:
+                f.write(f"{long_name}: {count}\n")
         
 print('Done generating species and gene trees.')
