@@ -14,6 +14,19 @@ import numpy as np
 from io import StringIO
 from Bio import Phylo
 
+def find_default_jar_path():
+    """Try to locate TGLGenerator.jar if --jar_path is not provided."""
+    candidates = [
+        os.environ.get("COALA_TGL_JAR"),
+        os.path.join(os.path.dirname(__file__), "TGLGenerator.jar"),
+        os.path.abspath("TGLGenerator.jar"),
+        os.path.abspath(os.path.join("..", "TGLGenerator.jar")),
+    ]
+    for c in candidates:
+        if c and os.path.exists(c):
+            return os.path.abspath(c)
+    return None
+
 # change host tree generation with birth death model 
 def run_tgl_generator(input_file, dataset_name, pc_value, ps_value, pd_value, output_dir, jar_path):
     command = [
@@ -32,8 +45,9 @@ def run_tgl_generator(input_file, dataset_name, pc_value, ps_value, pd_value, ou
 class GenerateHostTree:
     """Class to generate host trees and their corresponding event frequency files."""
     
-    def __init__(self, num_trees, min_leaves, max_leaves, output_dir, 
-                 cospeciation_range=(50, 70)):
+    def __init__(self, num_trees, min_leaves, max_leaves, output_dir,
+                 cospeciation_range=(50, 70), switch_range=(0, 5),
+                 birth_rate=0.7, death_rate=0.63):
         self.num_trees = num_trees  
         self.min_leaves = min_leaves  
         self.max_leaves = max_leaves  
@@ -42,18 +56,27 @@ class GenerateHostTree:
         # Define host tree and frequency directories
         self.host_tree_dir = os.path.join(output_dir, "host_trees")
         self.freq_dir = os.path.join(output_dir, "frequencies")
+        self.branch_dir = os.path.join(output_dir, "branches_lengths")
 
         # Ensure output directories exist
         os.makedirs(self.host_tree_dir, exist_ok=True)
         os.makedirs(self.freq_dir, exist_ok=True)
+        os.makedirs(self.branch_dir, exist_ok=True)
 
         # Define frequency ranges
         self.cospeciation_range = cospeciation_range
+        self.switch_range = switch_range
+        self.birth_rate = birth_rate
+        self.death_rate = death_rate
 
     def generate_random_tree(self, num_leaves, prefix="H"):
         """Generates a host tree using a birth-death process with given number of leaves."""
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.63, num_extant_tips=num_leaves)
+        t = treesim.birth_death_tree(
+            birth_rate=self.birth_rate,
+            death_rate=self.death_rate,
+            num_extant_tips=num_leaves,
+        )
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
         tmp_file.close()
 
@@ -69,15 +92,15 @@ class GenerateHostTree:
         """Saves the generated tree in Newick format."""
         tree_path = os.path.join(self.host_tree_dir, filename)
         tree.write(outfile=tree_path, format=9)
-        dir_no_branches = './generated_trees/branches_lengths'
-        os.makedirs(dir_no_branches, exist_ok=True)
-        tree_path2 = os.path.join(dir_no_branches, filename)
+
+        # Same tree but with branch-length formatting for downstream steps
+        tree_path2 = os.path.join(self.branch_dir, filename)
         tree.write(outfile=tree_path2, format=5)
 
     def generate_cophylo_frequencies(self):
         while True:
             cospeciation = random.randint(self.cospeciation_range[0], self.cospeciation_range[1])
-            switch = random.randint(0, 5)
+            switch = random.randint(self.switch_range[0], self.switch_range[1])
             remaining = 100 - (cospeciation + switch)
             dirichlet_sample = np.random.dirichlet([1, 1])
             scaled = [int(x * remaining) for x in dirichlet_sample]
@@ -115,11 +138,12 @@ class GenerateHostTree:
 class GenerateParasiteTree:
     """Class to generate and post-process parasite trees using Coala's TGLGenerator.jar."""
 
-    def __init__(self, host_dir, freq_dir, output_dir_tgl, jar_path):
+    def __init__(self, host_dir, freq_dir, output_dir_tgl, jar_path, num_threads=None):
         self.host_dir = host_dir
         self.freq_dir = freq_dir
         self.output_dir_tgl = output_dir_tgl
         self.jar_path = jar_path
+        self.num_threads = num_threads
 
         # Ensure output directory exists
         os.makedirs(self.output_dir_tgl, exist_ok=True)
@@ -128,7 +152,7 @@ class GenerateParasiteTree:
         pattern = re.compile(r"(\d+)")
         futures = []
 
-        max_workers = args.num_threads if args.num_threads else max(2, int(os.cpu_count() * 0.75))
+        max_workers = self.num_threads if self.num_threads else max(2, int(os.cpu_count() * 0.75))
         with ProcessPoolExecutor(max_workers=max_workers) as executor:
             for filename in sorted(os.listdir(self.host_dir)):
                 if filename.endswith(".nwk"):
@@ -163,16 +187,24 @@ class GenerateParasiteTree:
             for future in tqdm(as_completed(futures), total=len(futures), desc="Generating TGLs"):
                 input_file, dataset_name, return_code = future.result()
                 expected_tgl_filename = f"{dataset_name}-1.tgl"
-                generated_tgl_file = os.path.join(self.host_dir, expected_tgl_filename)
-                correct_tgl_file = os.path.join(self.output_dir_tgl, expected_tgl_filename)
+
+                # Coala may write the .tgl either in the input file directory or in the cwd
+                candidate_paths = [
+                    os.path.join(self.output_dir_tgl, expected_tgl_filename),
+                    os.path.join(self.host_dir, expected_tgl_filename),
+                ]
+                existing = next((p for p in candidate_paths if os.path.exists(p)), None)
 
                 if return_code != 0:
                     print(f"Error generating TGL for {input_file}")
-                elif os.path.exists(generated_tgl_file):
-                    shutil.move(generated_tgl_file, correct_tgl_file)
-                    print(f"Moved {generated_tgl_file} → {correct_tgl_file}")
+                elif existing is None:
+                    print(f"Warning: {expected_tgl_filename} not found in expected locations, skipping.")
                 else:
-                    print(f"Warning: {generated_tgl_file} not found, skipping move.")
+                    # Ensure it ends up in output_dir_tgl
+                    final_path = os.path.join(self.output_dir_tgl, expected_tgl_filename)
+                    if os.path.abspath(existing) != os.path.abspath(final_path):
+                        shutil.move(existing, final_path)
+                        print(f"Moved {existing} → {final_path}")
 
     def post_process_tgl_files(self):
 
@@ -329,46 +361,94 @@ class InferParasiteBranches:
 
 if __name__ == "__main__":
     import time
-    parser = argparse.ArgumentParser(description="Generate host and parasite trees")
-    parser.add_argument("--num_trees", type=int, required=True, help="Number of trees to generate")
+
+    parser = argparse.ArgumentParser(description="Generate host and parasite trees (three scenarios)")
+
+    # Optional overrides; if omitted the script runs end-to-end with sensible defaults.
+    parser.add_argument("--num_trees", type=int, default=100, help="Number of trees to generate per scenario")
     parser.add_argument("--min_leaves", type=int, default=15, help="Minimum number of leaves per tree")
-    parser.add_argument("--max_leaves", type=int, default=30, help="Maximum number of leaves per tree")
-    parser.add_argument("--output_dir", type=str, required=True, help="Output directory for host trees and frequencies")
-    parser.add_argument("--output_dir_tgl", type=str, required=True, help="Output directory for generated TGL files")
-    parser.add_argument("--jar_path", type=str, required=True, help="Path to TGLGenerator.jar")
-    parser.add_argument("--num_threads", type=int, default=None, help="Number of threads for parallel processing (default: 0.75 of CPUs)")
+    parser.add_argument("--max_leaves", type=int, default=50, help="Maximum number of leaves per tree")
+    parser.add_argument("--base_output_dir", type=str, default="./generated_trees", help="Base output directory")
+    parser.add_argument("--jar_path", type=str, default=None, help="Path to TGLGenerator.jar (or set COALA_TGL_JAR)")
+    parser.add_argument("--num_threads", type=int, default=None, help="Number of processes (default: 0.75 of CPUs)")
+    parser.add_argument("--regenerate", action="store_true", help="Force regeneration even if host trees already exist")
     args = parser.parse_args()
+
+    jar_path = os.path.abspath(args.jar_path) if args.jar_path else find_default_jar_path()
+    if not jar_path:
+        raise FileNotFoundError(
+            "Could not find TGLGenerator.jar. Provide --jar_path /path/to/TGLGenerator.jar or set COALA_TGL_JAR."
+        )
+
+    scenarios = [
+        # name, cospeciation_range, switch_range, birth_rate, death_rate
+        ("high_switch", (5, 10), (50, 70), 0.7, 0.24),
+        ("high_cosp", (70, 100), (0, 5), 0.7, 0.63),
+        ("medium", (20, 40), (20, 40), 0.7, 0.45),
+    ]
 
     total_start = time.time()
 
-    # Generate Host Trees
-    host_generator = GenerateHostTree(args.num_trees, args.min_leaves, args.max_leaves, args.output_dir)
-    start = time.time()
-    if not os.listdir(os.path.join(args.output_dir, "host_trees")):
-        host_generator.generate_and_save_trees()
-    else:
-        print("Host trees already exist, skipping generation.")
-    print(f"Host tree generation took {time.time() - start:.2f} seconds")
+    for scen_name, cosp_range, sw_range, birth_rate, death_rate in scenarios:
+        print("\n" + "=" * 80)
+        print(f"Running scenario: {scen_name} | cospeciation={cosp_range} | switch={sw_range} | birth={birth_rate} | death={death_rate}")
+        print("=" * 80)
 
-    host_dir, freq_dir = host_generator.get_directories()
-    args.jar_path = os.path.abspath(args.jar_path)
+        # Scenario-specific directories
+        scenario_root = os.path.join(args.base_output_dir, scen_name)
+        output_dir = os.path.join(scenario_root, "hosts")
+        output_dir_tgl = os.path.join(scenario_root, "Datasets")
+        output_parasite_with_lengths = os.path.join(scenario_root, "output_parasite_with_lengths")
 
-    # Generate Parasite Trees
-    parasite_generator = GenerateParasiteTree(host_dir, freq_dir, args.output_dir_tgl, args.jar_path)
-    
-    start = time.time()
-    parasite_generator.generate_tgl_files()
-    print(f"[TGL generation took {time.time() - start:.2f} seconds")
+        os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(output_dir_tgl, exist_ok=True)
+        os.makedirs(output_parasite_with_lengths, exist_ok=True)
 
-    start = time.time()
-    parasite_generator.post_process_tgl_files()
-    print(f"TGL post-processing took {time.time() - start:.2f} seconds")
+        # Generate Host Trees
+        host_generator = GenerateHostTree(
+            args.num_trees,
+            args.min_leaves,
+            args.max_leaves,
+            output_dir,
+            cospeciation_range=cosp_range,
+            switch_range=sw_range,
+            birth_rate=birth_rate,
+            death_rate=death_rate,
+        )
 
-    print(f"Total execution time: {time.time() - total_start:.2f} seconds")
+        start = time.time()
+        host_tree_folder = os.path.join(output_dir, "host_trees")
+        if args.regenerate or (not os.path.exists(host_tree_folder)) or (len(os.listdir(host_tree_folder)) == 0):
+            host_generator.generate_and_save_trees()
+        else:
+            print(f"Host trees already exist for {scen_name}, skipping generation.")
+        print(f"Host tree generation took {time.time() - start:.2f} seconds")
 
-    infer_branches = InferParasiteBranches(
-        datasets_dir="./generated_trees/Datasets",
-        hosts_dir="./generated_trees/branches_lengths",
-        output_dir="./generated_trees/output_parasite_with_lengths"
-    )
-    infer_branches.run()
+        host_dir, freq_dir = host_generator.get_directories()
+
+        # Generate Parasite Trees (.tgl)
+        parasite_generator = GenerateParasiteTree(
+            host_dir,
+            freq_dir,
+            output_dir_tgl,
+            jar_path,
+            num_threads=args.num_threads,
+        )
+
+        start = time.time()
+        parasite_generator.generate_tgl_files()
+        print(f"[TGL generation took {time.time() - start:.2f} seconds]")
+
+        start = time.time()
+        parasite_generator.post_process_tgl_files()
+        print(f"TGL post-processing took {time.time() - start:.2f} seconds")
+
+        # Infer parasite branch lengths + replace trees back into the .tgl
+        infer_branches = InferParasiteBranches(
+            datasets_dir=output_dir_tgl,
+            hosts_dir=host_generator.branch_dir,
+            output_dir=output_parasite_with_lengths,
+        )
+        infer_branches.run()
+
+    print(f"\nAll scenarios complete. Total execution time: {time.time() - total_start:.2f} seconds")
