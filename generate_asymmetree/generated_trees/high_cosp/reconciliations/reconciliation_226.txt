@@ -1,0 +1,2 @@
+Speciation: 27
+Duplication: 4

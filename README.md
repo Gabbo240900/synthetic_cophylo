@@ -18,7 +18,7 @@ host_death = 0.24
 ## simulate with Alcala model high Cospeciation
 python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
---output_dir ./generate_host_freq/generated_trees/ 
+--output_dir ./generate_host_freq/generated_trees_highCosp/ 
 
 (l = 0.7
 m = 0.615
@@ -32,7 +32,7 @@ host_death = 0.63
 ## simulate with Alcala model medium
 python simulate_input_trees.py --num_trees 500 \
 --min_leaves 15 --max_leaves 50 \
---output_dir ./generate_host_freq/generated_trees/ 
+--output_dir ./generate_host_freq/generated_trees_medium/ 
 
 (l = 0.7
 m = 0.6
@@ -42,8 +42,16 @@ tmrca = 2
 host_birth = 0.7
 host_death = 0.45
 )
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# COALA
+
+python simulate_input_trees.py --num_trees 20 	\
+ --base_output_dir ./generated_trees \
+ --num_threads 16 \
+ --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar
 
 ## simulate with Coala High switch
 python simulate_input_trees.py --num_trees 5000 \
@@ -127,7 +135,10 @@ python simulate_input_files.py \
 (h_mu = 0.45
 s_mu = 0.6
 t = 2)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Asymmetree 
 
+python generate_asymmetree.py
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # How the models work 
