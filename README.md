@@ -48,10 +48,13 @@ host_death = 0.45
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # COALA
 
-python simulate_input_trees.py --num_trees 20 	\
+## single code for all three scenarios
+
+python simulate_input_trees.py --num_trees 10000 	\
  --base_output_dir ./generated_trees \
  --num_threads 16 \
  --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar
+
 
 ## simulate with Coala High switch
 python simulate_input_trees.py --num_trees 5000 \
