@@ -102,6 +102,7 @@ host_birth = 0.7
 host_death = 0.45)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Treeducken 
 
 ## Simulate with treeducken high_switch
 python simulate_input_files.py \
@@ -109,7 +110,7 @@ python simulate_input_files.py \
   --c_lambda 0 0.05 \
   --s_lambda 0.7 0.7 \
   --s_her 1.4 1.7 \
-  --num_trees 500
+  --num_trees 1000
 
 (h_mu = 0.24
 s_mu = 0.66
@@ -121,7 +122,7 @@ python simulate_input_files.py \
   --c_lambda 1.4 1.7 \
   --s_lambda 0.7 0.7 \
   --s_her 0 0.05 \
-  --num_trees 500
+  --num_trees 1000
 
 (h_mu = 0.63
 s_mu = 0.645
@@ -133,7 +134,7 @@ python simulate_input_files.py \
   --c_lambda 0.5 0.8 \
   --s_lambda 0.7 0.7 \
   --s_her 0.5 0.8 \
-  --num_trees 500
+  --num_trees 1000
 
 (h_mu = 0.45
 s_mu = 0.6

@@ -1,34 +1,30 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = ((H3:0.5228438978,H4:0.8721006714):0.5844566037,((H1:0.06542151955,H2:1.257668258):0.1630070982,(H5:0.1077842072,H6:0.1077842072):1.312891149):0.03588191903):0.5434427249;;
+    TREE * Host1 = ((((H5:0.6714023201,(H6:0.2373643281,H7:0.2373643281):0.434037992):0.07538399728,H4:0.6548050842):0.01680865295,H3:0.2125285051):0.9135955777,(H1:0.7242728807,H2:1.371203056):0.305987492):0.322809452;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = ((((P4:0.2826611716,((((P7:0.1886972736,P8:0.1886972736):0.00757253482,(P9:0.1395255986,(P10:0.1077842072,P11:0.1077842072):0.03174139137):0.05674420977):0.1368818491,P6:0.007350811618):0.06965940138,P5:0.4028110589):0.4424483135):0.02684129899,P3:0.1113242828):0.4253735488,P2:0.2614370337):0.6508416933,P1:0.3541300407):0.05168408647;;
+    TREE * Para1 = ((P1:0.7242728807,P2:0.01237580754):0.3739013506,(((P7:0.3777896222,P8:0.3777896222):0.3689966952,P4:0.08075996273):0.2325186879,((P5:0.008106391487,P6:0.05375937894):0.2987086401,P3:0.6402983895):0.009194045112):0.7657994013):0.2548955934;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P5: H5
 		P7: H5
-		P8: H6
-		P9: H6
-		P10: H5
-		P11: H6
+		P8: H5
     ;
 END;
 
-Cospeciations            0.200000
-Host_Speciations         3.000000
-Host_Extinctions         2.000000
-Symbiont_Speciations     0.700000
-Symbiont_Extinctions     5.000000
-Host_Spread/Switches     0.100000
-Dispersals                    NaN
-Extirpations                  NaN
-Parafit_Stat             0.001655
-Parafit_P-value          0.880000
-Host_num_leaves          6.000000
-Parasite_num_leaves     11.000000
-Sim_time                 2.000000
-Total Events            10.000000
+Cospeciations           0.6
+Host_Speciations        3.0
+Host_Extinctions        3.0
+Symbiont_Speciations    0.2
+Symbiont_Extinctions    6.0
+Host_Spread/Switches    0.2
+Dispersals              NaN
+Extirpations            NaN
+Parafit_Stat            NaN
+Parafit_P-value         NaN
+Host_num_leaves         7.0
+Parasite_num_leaves     8.0
+Sim_time                2.0
+Total Events            5.0

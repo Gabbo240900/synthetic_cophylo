@@ -1,38 +1,30 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:0.4441521097,((H3:0.5257137676,((H4:0.1387990188,H5:0.1387990188):0.001442516176,(H6:0.06242747996,H7:0.06242747996):0.077814055):0.3854722326):0.978211112,H2:1.50392488):0.1053638596):0.3907112607;;
+    TREE * Host1 = ((H3:0.311571197,H4:0.311571197):1.511952986,(H1:0.07995798042,H2:0.4720070611):1.351517122):0.1764758173;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = ((P2:0.4441521097,(((P3:0.4809952183,(P4:0.05680866843,(P8:0.1259708599,P9:0.1259708599):0.2969030453):0.05812131312):0.04471854926,((P10:0.02944253645,P11:0.02944253645):0.3555974781,P5:0.3850400146):0.140673753):0.978211112,(P6:0.1984809206,P7:0.1984809206):1.305443959):0.1053638596):0.3757839136,P1:0.2912420516):0.01492734716;;
+    TREE * Para1 = (P1:0.1752233184,((P2:0.00841785151,(P3:0.05352018583,P4:0.03554064717):0.388073025):0.1864789795,(P5:0.3707530384,(P6:0.07995798042,(P7:0.05429921897,P8:0.05429921897):0.4177078421):0.2907950579):0.922307692):0.1384143717):0.1764758173;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P3: H3
-		P5: H3
-		P5: H4
-		P5: H6
-		P6: H2
 		P7: H2
-		P8: H3
-		P9: H3
-		P10: H6
-		P11: H6
+		P8: H2
     ;
 END;
 
-Cospeciations             0.333333
-Host_Speciations          3.000000
-Host_Extinctions          1.000000
-Symbiont_Speciations      0.666667
-Symbiont_Extinctions      3.000000
-Host_Spread/Switches           NaN
-Dispersals                     NaN
-Extirpations                   NaN
-Parafit_Stat            187.416063
-Parafit_P-value           0.010000
-Host_num_leaves           7.000000
-Parasite_num_leaves      11.000000
-Sim_time                  2.000000
-Total Events              9.000000
+Cospeciations           0.4
+Host_Speciations        1.0
+Host_Extinctions        1.0
+Symbiont_Speciations    0.4
+Symbiont_Extinctions    6.0
+Host_Spread/Switches    0.2
+Dispersals              NaN
+Extirpations            NaN
+Parafit_Stat            NaN
+Parafit_P-value         NaN
+Host_num_leaves         4.0
+Parasite_num_leaves     8.0
+Sim_time                2.0
+Total Events            5.0

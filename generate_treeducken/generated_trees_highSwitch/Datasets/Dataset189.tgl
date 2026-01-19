@@ -1,39 +1,38 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:1.43935477,(H2:0.7310534417,H3:0.7310534417):0.7083013285):0.5606452298;;
+    TREE * Host1 = (H1:1.772565673,H2:1.772565673):0.2274343275;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = (((P1:0.1604973716,P2:0.5513485195):0.1407600999,(P3:0.01138963719,((P6:0.08750254794,P7:0.08750254794):0.02569335727,P5:0.1131959052):0.08451195919):0.494400755):0.7860240927,((P8:0.08603238154,P9:0.08603238154):0.2596827294,((P10:0.007462183658,P11:0.007462183658):0.1173569301,P4:0.1248191138):0.2208959972):1.132417601):0.5218672879;;
+    TREE * Para1 = (P1:0.94688808,(((((((P10:0.2026415467,P11:0.2026415467):0.09070066112,P9:0.2933422078):0.1002123142,P8:0.1393836223):0.2684884723,P5:0.6620429944):0.4987662243,(P4:0.1752456901,(P6:0.4370532154,P7:0.5621552045):0.3378587782):0.260795236):0.3139268597,P3:0.1830555109):0.0208462998,P2:0.1804528327):0.3188167603):0.1856008615;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P2: H1
-		P4: H1
+		P5: H1
 		P5: H2
-		P6: H2
 		P7: H1
-		P8: H1
-		P8: H3
+		P7: H2
 		P9: H1
-		P9: H3
+		P9: H2
 		P10: H1
+		P10: H2
 		P11: H1
+		P11: H2
     ;
 END;
 
-Cospeciations                 NaN
-Host_Speciations         2.000000
-Host_Extinctions              NaN
-Symbiont_Speciations     0.500000
-Symbiont_Extinctions     2.000000
-Host_Spread/Switches     0.500000
-Dispersals                    NaN
-Extirpations                  NaN
-Parafit_Stat            46.155342
-Parafit_P-value          0.090000
-Host_num_leaves          3.000000
-Parasite_num_leaves     11.000000
-Sim_time                 2.000000
-Total Events            10.000000
+Cospeciations            NaN
+Host_Speciations         1.0
+Host_Extinctions         NaN
+Symbiont_Speciations     1.0
+Symbiont_Extinctions     6.0
+Host_Spread/Switches     NaN
+Dispersals               NaN
+Extirpations             NaN
+Parafit_Stat             NaN
+Parafit_P-value          NaN
+Host_num_leaves          2.0
+Parasite_num_leaves     11.0
+Sim_time                 2.0
+Total Events            10.0

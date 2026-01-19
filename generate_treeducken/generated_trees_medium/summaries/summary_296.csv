@@ -1,11 +1,11 @@
 "","x"
-"Cospeciations",5
+"Cospeciations",4
 "Host_Speciations",7
-"Host_Extinctions",6
-"Symbiont_Speciations",3
+"Host_Extinctions",1
+"Symbiont_Speciations",4
 "Symbiont_Extinctions",5
-"Host_Spread/Switches",3
+"Host_Spread/Switches",2
 "Dispersals",NA
 "Extirpations",NA
-"Parafit_Stat",421.243673541362
-"Parafit_P-value",0.01
+"Parafit_Stat",1.6004637185415
+"Parafit_P-value",0.11

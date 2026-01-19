@@ -1,41 +1,30 @@
 #NEXUS
 BEGIN HOST;
-    TREE * Host1 = (H1:0.08520827959,(H2:0.6146348713,(H3:0.4977643255,(H4:0.1424269727,H5:0.1424269727):0.3553373529):0.1168705458):0.3374447902):1.047920338;;
+    TREE * Host1 = ((H2:0.5941100375,H3:0.4222640043):0.05412377685,H1:0.6482338143):1.351766186;;
 ENDBLOCK;
 
 BEGIN PARASITE;
-    TREE * Para1 = ((((P8:0.05805470188,((P12:0.06603034004,P13:0.3009040184):0.008674347078,P11:0.3095783655):0.3057915637):0.7059167399,((P16:0.09124751911,P17:0.09124751911):0.4093095647,P10:0.5005570839):0.8207295852):0.5831222972,(((P6:0.1884783962,((P9:0.5187804865,(P14:0.2551914705,P15:0.2551914705):0.263589016):0.2011064744,P7:0.7198869609):0.0700920913):0.339775041,P3:0.2248283454):0.2302741883,((P4:0.0477308477,P5:0.1887924879):0.2471076199,P2:0.4359001077):0.05725679185):0.5443806847):0.08435653133,P1:0.009809711631):0.01123450245;;
+    TREE * Para1 = (P1:0.5524050454,(P2:0.2229560693,P3:0.08587342538):0.329448976):1.447594955;;
 ENDBLOCK;
 
 BEGIN DISTRIBUTION;
     RANGE
-		P7: H2
-		P7: H3
-		P9: H5
-		P10: H2
-		P11: H2
-		P11: H4
-		P11: H5
-		P13: H2
-		P14: H3
-		P15: H3
-		P16: H2
-		P17: H2
-		P17: H3
+		P1: H1
+		P2: H1
     ;
 END;
 
-Cospeciations                 NaN
-Host_Speciations         4.000000
-Host_Extinctions         1.000000
-Symbiont_Speciations     0.923077
-Symbiont_Extinctions     8.000000
-Host_Spread/Switches     0.076923
-Dispersals                    NaN
-Extirpations                  NaN
-Parafit_Stat            24.197271
-Parafit_P-value          0.060000
-Host_num_leaves          5.000000
-Parasite_num_leaves     17.000000
-Sim_time                 2.000000
-Total Events            13.000000
+Cospeciations           NaN
+Host_Speciations        2.0
+Host_Extinctions        1.0
+Symbiont_Speciations    0.5
+Symbiont_Extinctions    1.0
+Host_Spread/Switches    0.5
+Dispersals              NaN
+Extirpations            NaN
+Parafit_Stat            NaN
+Parafit_P-value         NaN
+Host_num_leaves         3.0
+Parasite_num_leaves     3.0
+Sim_time                2.0
+Total Events            2.0
