@@ -8,7 +8,7 @@ import csv
 import random
 
 base_path = "/Users/gabriele/synthetic_cophylo/generate_asymmetree/generated_trees"
-num_trees = 500
+num_trees = 1000
 species_pattern = re.compile(r'(?<=\(|,)(\d+):')
 gene_pattern = re.compile(r'(?<=[\(|,|)])(\d+)(?=(?:<|:))')
 assoc_pattern = re.compile(r'<(\d+(?:-\d+)*)>')

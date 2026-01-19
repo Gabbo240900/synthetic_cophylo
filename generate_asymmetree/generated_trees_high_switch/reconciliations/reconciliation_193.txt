@@ -1,4 +1,4 @@
-Loss: 38
-Speciation: 65
-Duplication: 44
-Horizontal Gene Transfer: 84
+Loss: 163
+Speciation: 267
+Horizontal Gene Transfer: 473
+Duplication: 147

@@ -1,2 +1,0 @@
-Speciation: 15
-Duplication: 2

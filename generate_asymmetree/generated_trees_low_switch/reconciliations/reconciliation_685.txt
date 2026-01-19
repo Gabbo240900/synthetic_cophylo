@@ -1,0 +1,2 @@
+Speciation: 23
+Duplication: 3

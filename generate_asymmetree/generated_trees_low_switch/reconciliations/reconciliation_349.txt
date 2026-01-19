@@ -1,3 +1,3 @@
-Loss: 17
-Speciation: 52
-Duplication: 40
+Loss: 14
+Speciation: 41
+Duplication: 29
