@@ -7,11 +7,7 @@
 **/reconciliations/**
 **/host_trees/**
 **/parasite_trees/**
-<<<<<<< Updated upstream
 **/alcala_trees/**
 *.tgl 
 *.png 
 
-=======
-**/alcala_trees/**
->>>>>>> Stashed changes
