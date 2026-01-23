@@ -9,6 +9,6 @@
 **/parasite_trees/**
 **/alcala_trees/**
 **/Datasets/**
-**/*.tgl 
-**/*.png 
+*.tgl 
+*.png 
 
