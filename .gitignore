@@ -8,6 +8,7 @@
 **/host_trees/**
 **/parasite_trees/**
 **/alcala_trees/**
-*.tgl 
-*.png 
+**/Datasets/**
+**/*.tgl 
+**/*.png 
 
