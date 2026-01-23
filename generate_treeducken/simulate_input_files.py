@@ -71,7 +71,10 @@ class GenerateTGLFiles:
         event_keys = [
             "Cospeciations",
             "Host_Spread/Switches",
-            "Symbiont_Speciations"
+            "Symbiont_Speciations",
+            "Host_Extinctions",
+            "Symbiont_Extinctions",
+            'Hostp_Speciations'
         ]
         total_events = summary_df[event_keys].sum()
         for key in event_keys:
