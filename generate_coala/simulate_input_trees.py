@@ -102,11 +102,14 @@ class GenerateHostTree:
             cospeciation = random.randint(self.cospeciation_range[0], self.cospeciation_range[1])
             switch = random.randint(self.switch_range[0], self.switch_range[1])
             remaining = 100 - (cospeciation + switch)
-            dirichlet_sample = np.random.dirichlet([1, 1])
-            scaled = [int(x * remaining) for x in dirichlet_sample]
-            # Adjust the last value to ensure the total adds up
-            scaled[-1] = remaining - sum(scaled[:-1])
-            duplication, loss = scaled
+            if remaining < 0:
+                duplication, loss = 0, 0
+            else:  
+                dirichlet_sample = np.random.dirichlet([1, 1])
+                scaled = [int(x * remaining) for x in dirichlet_sample]
+                # Adjust the last value to ensure the total adds up
+                scaled[-1] = remaining - sum(scaled[:-1])
+                duplication, loss = scaled
             return cospeciation, loss, switch, duplication
 
     def generate_and_save_trees(self):
@@ -383,7 +386,7 @@ if __name__ == "__main__":
     scenarios = [
         # name, cospeciation_range, switch_range, birth_rate, death_rate
         ("high_switch", (5, 10), (50, 70), 0.7, 0.24),
-        ("high_cosp", (70, 100), (0, 5), 0.7, 0.63),
+        ("high_cosp", (70, 90), (0, 5), 0.7, 0.63),
         ("medium", (20, 40), (20, 40), 0.7, 0.45),
     ]
 
