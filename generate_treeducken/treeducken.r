@@ -13,7 +13,6 @@ time_to_sim <- as.numeric(args[7])
 sim_index   <- as.integer(args[8])
 
 
-    
 host_symb_sets <- sim_cophyBD(
   hbr = h_lambda,
   hdr = h_mu,

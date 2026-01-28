@@ -7,9 +7,10 @@ import pandas as pd
 import random
 from ete3 import Tree
 from tqdm import tqdm
+import shutil
 
 class GenerateTGLFiles:
-    def __init__(self, h_lambda, h_mu, c_lambda, s_lambda, s_mu, s_her, time_to_sim, num_trees,numbsim=1):
+    def __init__(self, h_lambda, h_mu, c_lambda, s_lambda, s_mu, s_her, time_to_sim, num_trees, base_out_dir, numbsim=1):
         self.h_lambda = h_lambda
         self.h_mu = h_mu
         self.c_lambda = c_lambda
@@ -19,12 +20,48 @@ class GenerateTGLFiles:
         self.time_to_sim = time_to_sim
         self.num_trees = num_trees
         self.numbsim = numbsim
+        self.base_out_dir = base_out_dir
+
+    def ensure_output_dirs_and_symlink(self):
+        """
+        Ensure the expected output subdirectories exist under base_out_dir and
+        create/update a symlink named 'generated_trees' that points to base_out_dir.
+
+        This is required because treeducken.r writes to 'generated_trees/...'.
+        """
+        # Create expected subdirectories
+        for sub in ["host_tree", "symb_tree", "associations", "summaries", "Datasets"]:
+            os.makedirs(os.path.join(self.base_out_dir, sub), exist_ok=True)
+
+        # Create/update symlink in the script directory
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        link_path = os.path.join(script_dir, "generated_trees")
+
+        # If link_path exists as a symlink, replace it
+        if os.path.islink(link_path):
+            os.unlink(link_path)
+        elif os.path.exists(link_path):
+            # If it's a real directory/file, do not delete it automatically (safety).
+            raise RuntimeError(
+                f"Path '{link_path}' exists and is not a symlink. "
+                f"Please rename/remove it so the script can create a symlink "
+                f"to '{self.base_out_dir}'."
+            )
+
+        os.symlink(os.path.abspath(self.base_out_dir), link_path)
 
     def run_r_script(self, sim_index):
         """Run the R script with parameters."""
+        # treeducken.r writes into 'generated_trees/...', so ensure the symlink points
+        # to this experiment's base_out_dir before running.
+        self.ensure_output_dirs_and_symlink()
+
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        r_script_path = os.path.join(script_dir, "treeducken.r")
+
         args = [
             "Rscript",
-            'treeducken.r',
+            r_script_path,
             str(self.h_lambda),
             str(self.h_mu),
             str(self.c_lambda),
@@ -35,16 +72,24 @@ class GenerateTGLFiles:
             str(sim_index)
         ]
         try:
-            subprocess.run(args, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(
+                args,
+                check=True,
+                cwd=script_dir,  # ensures symlink + relative paths resolve correctly
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
         except subprocess.CalledProcessError as e:
             print(f"Error running R script: {e}")
+        except RuntimeError as e:
+            print(f"Error preparing output paths: {e}")
     
     def generate_tgl_files(self, sim_index):
         # Find the most recent files for this simulation
-        host_file = f"generated_trees/host_tree/host_tree_{sim_index}.nwk"
-        symb_file = f"generated_trees/symb_tree/symb_tree_{sim_index}.nwk"
-        assoc_file = f"generated_trees/associations/association_{sim_index}.csv"
-        summary_file = f"generated_trees/summaries/summary_{sim_index}.csv"
+        host_file = f"{self.base_out_dir}/host_tree/host_tree_{sim_index}.nwk"
+        symb_file = f"{self.base_out_dir}/symb_tree/symb_tree_{sim_index}.nwk"
+        assoc_file = f"{self.base_out_dir}/associations/association_{sim_index}.csv"
+        summary_file = f"{self.base_out_dir}/summaries/summary_{sim_index}.csv"
 
         if not all(os.path.exists(f) for f in [host_file, symb_file, assoc_file, summary_file]):
             print(f"[WARN] One or more files missing for sim_index {sim_index}, skipping TGL generation.")
@@ -70,7 +115,7 @@ class GenerateTGLFiles:
         # Normalize event counts to proportions
         event_keys = [
             "Cospeciations",
-            "Host_Spread/Switches",
+            "Host_Spreads/switches",
             "Symbiont_Speciations",
             "Host_Extinctions",
             "Symbiont_Extinctions",
@@ -107,49 +152,80 @@ END;
 
 {summary_df.to_string(index=True, header=False)}
 """
-        out_dir = 'generated_trees/Datasets'
+        out_dir = os.path.join(self.base_out_dir, 'Datasets')
         os.makedirs(out_dir, exist_ok=True)
-        out_path = os.path.join('generated_trees/Datasets', f'Dataset{sim_index}.tgl')
+        out_path = os.path.join(out_dir, f'Dataset{sim_index}.tgl')
         with open(out_path, 'w') as out_file:
             out_file.write(content)
 
 def main():
     parser = argparse.ArgumentParser(description="Run Treeducken simulation and generate outputs.")
-    parser.add_argument("--h_lambda", type=float, nargs=2, metavar=('MIN', 'MAX'), required=True)
-    parser.add_argument("--c_lambda", type=float, nargs=2, metavar=('MIN', 'MAX'), required=True)
-    parser.add_argument("--s_lambda", type=float, nargs=2, metavar=('MIN', 'MAX'), required=True)
-    parser.add_argument("--s_her", type=float, nargs=2, metavar=('MIN', 'MAX'), required=True)
     parser.add_argument("--num_trees", type=int, required=True)
 
     args = parser.parse_args()
 
-    time_grid = [2]
-    sim_index = 1
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    for _ in tqdm(range(args.num_trees), desc="Simulating parameter sets"):
-        h_lambda = random.uniform(*args.h_lambda)
-        c_lambda = random.uniform(*args.c_lambda)
-        s_lambda = random.uniform(*args.s_lambda)
-        s_her = random.uniform(*args.s_her)
+    time_grid = [1]
 
-        h_mu = random.uniform(0.3, 0.3) * (h_lambda + c_lambda)
-        s_mu = random.uniform(0.3, 0.3) * (s_lambda + c_lambda + s_her)
+    experiments = [
+        {
+            "name": "highSwitch",
+            "out_dir": os.path.join(script_dir, "time_analysis/small_time/high_switch"),
+            "h_lambda": (0.7, 0.7),
+            "c_lambda": (0.0, 0.05),
+            "s_lambda": (0.7, 0.7),
+            "s_her": (1.4, 1.7),
+        },
+        {
+            "name": "highCosp",
+            "out_dir": os.path.join(script_dir, "time_analysis/small_time/high_cosp"),
+            "h_lambda": (0.7, 0.7),
+            "c_lambda": (1.4, 1.7),
+            "s_lambda": (0.7, 0.7),
+            "s_her": (0.0, 0.05),
+        },
+        {
+            "name": "medium",
+            "out_dir": os.path.join(script_dir, "time_analysis/small_time/medium"),
+            "h_lambda": (0.7, 0.7),
+            "c_lambda": (0.5, 0.8),
+            "s_lambda": (0.7, 0.7),
+            "s_her": (0.5, 0.8),
+        },
+    ]
 
-        for time_to_sim in time_grid:
-            generator = GenerateTGLFiles(
-                h_lambda=h_lambda,
-                h_mu=h_mu,
-                c_lambda=c_lambda,
-                s_lambda=s_lambda,
-                s_mu=s_mu,
-                s_her=s_her,
-                time_to_sim=time_to_sim,
-                num_trees=args.num_trees,
-                numbsim=1
-            )
-            generator.run_r_script(sim_index)
-            generator.generate_tgl_files(sim_index)
-            sim_index += 1
+    for exp in experiments:
+        print(f"Running experiment: {exp['name']}")
+        os.makedirs(exp["out_dir"], exist_ok=True)
+
+        sim_index = 1  # reset for each experiment
+
+        for _ in tqdm(range(args.num_trees), desc=f"Simulating {exp['name']}"):
+            h_lambda = random.uniform(*exp["h_lambda"])
+            c_lambda = random.uniform(*exp["c_lambda"])
+            s_lambda = random.uniform(*exp["s_lambda"])
+            s_her = random.uniform(*exp["s_her"])
+
+            h_mu = 0.3 * (h_lambda + c_lambda)
+            s_mu = 0.3 * (s_lambda + c_lambda + s_her)
+
+            for time_to_sim in time_grid:
+                generator = GenerateTGLFiles(
+                    h_lambda=h_lambda,
+                    h_mu=h_mu,
+                    c_lambda=c_lambda,
+                    s_lambda=s_lambda,
+                    s_mu=s_mu,
+                    s_her=s_her,
+                    time_to_sim=time_to_sim,
+                    num_trees=args.num_trees,
+                    base_out_dir=exp["out_dir"],
+                    numbsim=1
+                )
+                generator.run_r_script(sim_index)
+                generator.generate_tgl_files(sim_index)
+                sim_index += 1
 
 if __name__ == "__main__":
     main()
