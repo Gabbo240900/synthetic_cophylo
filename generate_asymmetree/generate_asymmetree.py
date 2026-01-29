@@ -30,7 +30,7 @@ for i in range(num_trees):
     os.makedirs(f"{base_path}/high_cosp/reconciliations", exist_ok=True)
     os.makedirs(f"{base_path}/high_cosp/Datasets", exist_ok=True)
     num_leaves = random.randint(15, 50)
-    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.63)
+    s = te.species_tree_n_age(n=num_leaves, model='BDP', age=2, birth_rate=0.7, death_rate=0.63)
     #DECIDE HOW WE CHOOSE DUPLICATION AND LOSS RATES. 
     hgt_rate = random.uniform(0, 0.05)
     g = te.dated_gene_tree(s, dupl_rate=0.5, loss_rate=0.5, hgt_rate=hgt_rate) 
@@ -120,7 +120,7 @@ for i in range(num_trees):
     os.makedirs(f"{base_path}/high_switch/reconciliations", exist_ok=True)
     os.makedirs(f"{base_path}/high_switch/Datasets", exist_ok=True)
     num_leaves = random.randint(15, 50)
-    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.24)
+    s = te.species_tree_n_age(n=num_leaves,model='BDP', age=2, birth_rate=0.7, death_rate=0.24)
     #DECIDE HOW WE CHOOSE DUPLICATION AND LOSS RATES. 
     hgt_rate = random.uniform(1.4, 1.7)
     g = te.dated_gene_tree(s, dupl_rate=0.5, loss_rate=0.5, hgt_rate=hgt_rate) 
@@ -210,7 +210,7 @@ for i in range(num_trees):
     os.makedirs(f"{base_path}/medium/reconciliations", exist_ok=True)
     os.makedirs(f"{base_path}/medium/Datasets", exist_ok=True)
     num_leaves = random.randint(15, 50)
-    s = te.species_tree_n_age(n=num_leaves, age=2, birth_rate=0.7, death_rate=0.45)
+    s = te.species_tree_n_age(n=num_leaves,model='BDP', age=2, birth_rate=0.7, death_rate=0.45)
     #DECIDE HOW WE CHOOSE DUPLICATION AND LOSS RATES. 
     hgt_rate = random.uniform(0.5, 0.8)
     g = te.dated_gene_tree(s, dupl_rate=0.5, loss_rate=0.5, hgt_rate=hgt_rate) 
