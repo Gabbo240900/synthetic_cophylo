@@ -11,4 +11,6 @@
 **/Datasets/**
 *.tgl 
 *.png 
+.DS_Store
+*.nwk
 
