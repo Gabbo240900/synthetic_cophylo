@@ -50,97 +50,17 @@ host_death = 0.45
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # COALA
 
-## single code for all three scenarios
-
 python simulate_input_trees.py --num_trees 10000 	\
  --base_output_dir ./generated_trees \
  --num_threads 16 \
  --jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar
 
 
-## simulate with Coala High switch
-python simulate_input_trees.py --num_trees 5000 \
---min_leaves 15 --max_leaves 50 \
---output_dir ./generated_trees/ \
---output_dir_tgl ./generated_trees/Datasets/ \
---jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
---num_threads 10
-
-(pc = random(0.05,0.1)
-ps = random(0.5, 0.7)
-pd = random.dirichlet * (1 - pc -ps) 
-pl = 100-pc-ps-pd
-host_birth = 0.7
-host_death = 0.24)
-
-## simulate with Coala High cospeciation - rivediamo 
-python simulate_input_trees.py --num_trees 4000 \
---min_leaves 15 --max_leaves 50 \
---output_dir ./generated_trees/ \
---output_dir_tgl ./generated_trees/Datasets/ \
---jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
---num_threads 10
-
-(pc = random(0.7,1.0)
-ps = random(0, 0.05)
-pd,pl = random.dirichlet * (1 - pc -ps) 
-
-host_birth = 0.7
-host_death = 0.63)
-
-## simulate with Coala Medium Values 
-python simulate_input_trees.py --num_trees 2500 \
---min_leaves 15 --max_leaves 50 \
---output_dir ./generated_trees/ \
---output_dir_tgl ./generated_trees/Datasets/ \
---jar_path ./cophylogeny-ML/code/coala/TGLGenerator.jar \
---num_threads 8
-
-(pc = random(0.2,0.4)
-ps = random(0.2, 0.4)
-pd = random.dirichlet * (1 - pc -ps) 
-pl = 100-pc-ps-pd
-host_birth = 0.7
-host_death = 0.45)
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Treeducken 
 
-## Simulate with treeducken high_switch
-python simulate_input_files.py \
-  --h_lambda 0.7 0.7 \
-  --c_lambda 0 0.05 \
-  --s_lambda 0.7 0.7 \
-  --s_her 1.4 1.7 \
-  --num_trees 1000
+python simulate_input_files.py --num_trees 1000
 
-(h_mu = 0.24
-s_mu = 0.66
-t = 2)
-
-## Simulate with treeducken high_cospeciation
-python simulate_input_files.py \
-  --h_lambda 0.7 0.7 \
-  --c_lambda 1.4 1.7 \
-  --s_lambda 0.7 0.7 \
-  --s_her 0 0.05 \
-  --num_trees 1000
-
-(h_mu = 0.63
-s_mu = 0.645
-t = 2)
-
-## Simulate with treeducken med_values
-python simulate_input_files.py \
-  --h_lambda 0.7 0.7 \
-  --c_lambda 0.5 0.8 \
-  --s_lambda 0.7 0.7 \
-  --s_her 0.5 0.8 \
-  --num_trees 1000
-
-(h_mu = 0.45
-s_mu = 0.6
-t = 2)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Asymmetree 
 

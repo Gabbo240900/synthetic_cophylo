@@ -1,3 +1,4 @@
+#COALA GENERATOR
 import os
 import random
 import argparse

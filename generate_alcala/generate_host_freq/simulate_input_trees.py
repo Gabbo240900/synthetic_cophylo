@@ -1,3 +1,4 @@
+#ALCALA GENERATOR 
 import os
 import random
 import argparse
@@ -14,7 +15,6 @@ import numpy as np
 from io import StringIO
 from Bio import Phylo
 from collections import defaultdict
-
 # Track datasets with errors
 error_datasets = []
 

@@ -166,7 +166,7 @@ def main():
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    time_grid = [1]
+    time_grid = [2]
 
     experiments = [
         {
