@@ -3,9 +3,9 @@
 # Alcala
 
 ## simulate with Alcala model high Switch
-python simulate_input_trees.py --num_trees 500 \
+python simulate_input_trees.py --num_trees 5 \
 --min_leaves 30 --max_leaves 50 \
---output_dir ./generate_host_freq/generated_trees/ 
+--output_dir generated_trees/ 
 
 
 (l = 0.7

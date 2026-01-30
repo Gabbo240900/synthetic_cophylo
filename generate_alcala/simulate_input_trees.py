@@ -21,7 +21,7 @@ error_datasets = []
 
 # Clean existing folders if present
 for folder in ["alcala_trees", "Dataset", "host_trees", "parasite_trees"]:
-    full_path = os.path.join("generate_host_freq", "generated_trees", folder)
+    full_path = os.path.join("generated_trees", folder)
     if os.path.exists(full_path):
         shutil.rmtree(full_path)
 
@@ -36,8 +36,8 @@ class GenerateHostTree:
         self.tmrca = tmrca
 
         # Define host tree and frequency directories
-        self.host_tree_dir = os.path.join("generate_host_freq", "generated_trees", "host_trees")
-        self.alcala_tree_dir = os.path.join("generate_host_freq", "generated_trees", "alcala_trees")
+        self.host_tree_dir = os.path.join("generated_trees", "host_trees")
+        self.alcala_tree_dir = os.path.join("generated_trees", "alcala_trees")
         os.makedirs(self.alcala_tree_dir, exist_ok=True)
 
         # Ensure output directories exist
@@ -55,7 +55,7 @@ class GenerateHostTree:
         c = random.uniform(0.05, 0.1)
 
         cmd = [
-            "/Users/gabriele/Alcala-python/software/bin/cophylo.out",
+            "software/bin/cophylo.out",
             "-l", "0.7",
             "-m", "0.66",
             '-c', str(c),
@@ -71,14 +71,14 @@ class GenerateHostTree:
             subprocess.run(cmd, check=True)
             edge_txt_path = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}edges_0.txt")
             length_txt_path = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}edgelength_0.txt")
-            parasite_newick_dir = os.path.join("generate_host_freq", "generated_trees", "parasite_trees")
+            parasite_newick_dir = os.path.join("generated_trees", "parasite_trees")
             os.makedirs(parasite_newick_dir, exist_ok=True)
             newick_output_path = os.path.join(parasite_newick_dir, f"parasite_tree_{host_tree_index}.nwk")
             self.txt_to_newick(edge_txt_path, length_txt_path, newick_output_path)
             host_nwk_path = os.path.join(self.host_tree_dir, f"host_tree_{host_tree_index}.nwk")
             hpassoc_path = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}hpassoc_0.txt")
             params_path = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}params_0.txt")
-            dataset_dir = os.path.join("generate_host_freq", "generated_trees", "Dataset")
+            dataset_dir = os.path.join("generated_trees", "Dataset")
             os.makedirs(dataset_dir, exist_ok=True)
             dataset_path = os.path.join(dataset_dir, f"Dataset_{host_tree_index}.tgl")
             self.create_tgl_dataset(host_nwk_path, newick_output_path, hpassoc_path, params_path, dataset_path)
