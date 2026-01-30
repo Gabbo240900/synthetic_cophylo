@@ -1,4 +1,4 @@
-#ALCALA GENERATOR 
+#ALCALA GENERATOR - add time for host conditioning birth death 
 import os
 import random
 import argparse
@@ -89,7 +89,7 @@ class GenerateHostTree:
 
 
     def generate_random_tree(self, num_leaves, prefix="H"):
-        """Generates a host tree using a birth-death process with given number of leaves."""
+        """Generates a host tree using a birth-death process with given number of leaves. Add time = 2 also for the host""" 
         tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
         t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.24, num_extant_tips=num_leaves)
         t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
@@ -230,7 +230,9 @@ class GenerateHostTree:
             f.write(f"Host_switch = {host_switch}\n")
             f.write("ENDBLOCK\n")
 
-    def save_specialist_distribution(self, tree, folder_path, tree_index):
+
+    def save_specialist_distribution(self, tree, folder_path, tree_index): 
+        # zipf distribution s=1.6 probably. Rescale so sum is (1/K to power s).
         num_leaves = len(tree.get_leaves())
         weights = np.random.dirichlet([1.0] * (num_leaves + 1))  # Allow parasites to infect multiple hosts
         values = [f"{w:.6f}" for w in weights]

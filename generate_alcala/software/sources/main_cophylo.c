@@ -143,8 +143,8 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
   int Nnode; //number of nodes
 
   for( j=0;j<2*N;j++){
-    for( k=0;j<NH;j++){
-      pedges[j][k] =0;
+    for( k=0;k<NH;k++){
+      pedges[j][k] = 0;
     }
   }
   for( j=0;j<2*N;j++) nedges[j] = 0;
@@ -280,28 +280,35 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
 	      if( pP<=ncum ){//chosen P
 		fromP = k;
 		if(nedges[pt[k]]<ih+2){//HS only if P does not already infect all H
-		  for (ll=0; ll<ih+2; ++ll){
-		    drawH[ll] = nlistt[ih][ll]; //set values
-		  }
-		  shuffle(drawH,ih+2);//random_shuffle( &drawH[0],&drawH[ih+2]); // using random shuffling function
-		  int m = 0;
-		  toH = drawH[m];
-		  bool findH = true;
-		  while(findH){
-		    findH = false;
-		    for( o=0;o<nedges[pt[fromP]];o++){
-		      if( toH==pedges[pt[fromP]][o]){
-			findH   = true;
-			toH = drawH[m+1];
-		      }
-		    }
-		    m++;
-		  }
-		  if(toH>2*NH) printf("\nWEIRD toH=%d (m=%d)\n",toH,m-1);
-		  pedges[pt[fromP]][nedges[pt[fromP]]] = toH;
-		  nedges[pt[fromP]]++;
-		  npopS++;
-		  break;
+                  for (ll = 0; ll < ih + 2; ++ll) {
+                    drawH[ll] = nlistt[ih][ll]; // set values
+                  }
+                  shuffle(drawH, ih + 2); // randomize candidate hosts
+
+                  // pick the first host not already infected by this parasite
+                  toH = -1;
+                  for (int cand = 0; cand < ih + 2; cand++) {
+                    int candidate = drawH[cand];
+                    bool already = false;
+                    for (o = 0; o < nedges[pt[fromP]]; o++) {
+                      if (candidate == pedges[pt[fromP]][o]) {
+                        already = true;
+                        break;
+                      }
+                    }
+                    if (!already) {
+                      toH = candidate;
+                      break;
+                    }
+                  }
+
+                  // If every host is already infected (should be rare given the earlier check), skip this switch.
+                  if (toH >= 0) {
+                    pedges[pt[fromP]][nedges[pt[fromP]]] = toH;
+                    nedges[pt[fromP]]++;
+                    npopS++;
+                  }
+                  break;
 		}// if P does not infect every H
 	      }//chosen P
 	    }
@@ -600,13 +607,24 @@ int main(int argc, char ** argv)//takes the path to an input file as argument
     for( j=0;j<2*N;j++){
       if(edge_alive[j]) nalive++;
     }
-    while(nalive<Nmin){
+
+    int attempts = 0;
+    const int max_attempts = 2000; // avoids infinite loops when parameters are too "extinction-heavy"
+    while(nalive < Nmin && attempts < max_attempts){
+      attempts++;
       N = bd_P_cospe(host_E,host_E_length,pedges,nedges,edge_alive,nh,lp,mp,1-Pg,nfP,dge,lswitchl[i],pcol[i],pTmrca,res_E,res_E_length,nmax);
-      printf("\tNumber of tips: %d\n",N);
-      nalive=0;
+      printf("\tNumber of tips: %d\n", N);
+
+      nalive = 0;
       for( j=0;j<2*N;j++){
-	if(edge_alive[j]) nalive++;
+        if(edge_alive[j]) nalive++;
       }
+    }
+
+    if(nalive < Nmin){
+      fprintf(stderr, "WARNING: Could not reach Nmin=%d alive tips after %d attempts (last N=%d, nalive=%d). Consider increasing -t (Tmrca), increasing -l, decreasing -m, or lowering -N.\n",
+              Nmin, max_attempts, N, nalive);
+      // Continue anyway with the last simulated tree (may be empty). If you prefer to abort, replace the next line with: return 1;
     }
     printf("\tend compute cophylogeny\n");
     //print results
@@ -632,15 +650,21 @@ int main(int argc, char ** argv)//takes the path to an input file as argument
     }
     fprintf(fh,"%d\n",N-1);
     printf("\tend write edges\n");
-    int icur=1;
-    int iii=0;
-    while(icur<=nalive){
-      if(edge_alive[iii]){
-	if(nedges[iii+1]==0) printf("ERROR nedges\n");
-	for( j=0;j<nedges[iii+1];j++){
-	  fprintf(ff,"%d\t%d\n",icur+2*nh-1,host_E[2*pedges[iii+1][j]+1]);
-	}
-	icur++;
+    int icur = 1;
+    int iii = 0;
+    while (icur <= nalive) {
+      if (edge_alive[iii]) {
+        if (nedges[iii + 1] == 0) printf("ERROR nedges\n");
+        for (j = 0; j < nedges[iii + 1]; j++) {
+          int hedge = pedges[iii + 1][j];
+          if (hedge < 0 || hedge >= nhe) {
+            fprintf(stderr, "WARNING: invalid host edge index %d for parasite_tip=%d (iii=%d, j=%d). Skipping association.\n",
+                    hedge, icur, iii, j);
+            continue;
+          }
+          fprintf(ff, "%d\t%d\n", icur + 2 * nh - 1, host_E[2 * hedge + 1]);
+        }
+        icur++;
       }
       iii++;
     }

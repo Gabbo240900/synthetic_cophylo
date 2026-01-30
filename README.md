@@ -1,10 +1,29 @@
 # How to run the models 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Next things to do 
+
+- fix alcala distribution of parasite being specialist or generalist using zipf with s=1.6 
+- fix alcala host birth function to use 'treesim conditioned on age and number extant tips' 
+- generate alcala data with similar parameters to coala 
+- Once alcala and coala are done, look at their reconciliation values 
+- generate asymmetree data with the parameters we chose 
+- tune asymemtree parameters to resemble alcala and coala
+- tune treeducken parameters to resemble alcala and coala
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Alcala
 
 ## simulate with Alcala model high Switch
-python simulate_input_trees.py --num_trees 5 \
---min_leaves 30 --max_leaves 50 \
+python simulate_input_trees.py --num_trees 1000 \
+--min_leaves 10 --max_leaves 50 \
 --output_dir generated_trees/ 
 
 

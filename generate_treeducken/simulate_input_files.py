@@ -167,6 +167,8 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     time_grid = [2]
+    
+    # INCREASE COSPECIATION VALUEs and switches etc... need to increase frequencies 
 
     experiments = [
         {
@@ -175,13 +177,13 @@ def main():
             "h_lambda": (0.7, 0.7),
             "c_lambda": (0.0, 0.05),
             "s_lambda": (0.7, 0.7),
-            "s_her": (1.4, 1.7),
+            "s_her": (1.8, 2.2),
         },
         {
             "name": "highCosp",
             "out_dir": os.path.join(script_dir, "time_analysis/small_time/high_cosp"),
             "h_lambda": (0.7, 0.7),
-            "c_lambda": (1.4, 1.7),
+            "c_lambda": (1.8, 2.2),
             "s_lambda": (0.7, 0.7),
             "s_her": (0.0, 0.05),
         },
