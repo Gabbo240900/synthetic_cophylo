@@ -82,6 +82,8 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
   for(j=0;j<NH-1;j++) nlistt[j] = malloc( (j+2)*sizeof(int));//new int[j+2]; //list of H edges after event j
   float** tcur = malloc( (NH-1)*sizeof(float*));//new float*[NH-1]; //list of H edge lengths after all events
   for(j=0;j<NH-1;j++) tcur[j] = malloc( (j+2)*sizeof(float)); //new float[j+2]; //list of H edge lengths after event j
+  int ret_ntip = 0; // return value; use cleanup label to free memory on all exits
+  int *newnum = NULL; // mapping array (heap) to avoid VLA + goto issues
 
   int children=0;
   
@@ -188,7 +190,8 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
   int npopS = nedges[0];
   for( ih=pstart; ih<NH-1; ih++){
     if((npt==0)||(2*is>=N)){
-      return 0;
+      ret_ntip = 0;
+      goto cleanup;
     }
     if(ih==pstart){ 
       th = Ths[ih] - (Thtmp- Tmrca); //time to next H speciation event
@@ -206,13 +209,13 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
     }
 
     while(tpp<th){
-      if((npt==0)||(2*is>=N)) return 0;
+      if((npt==0)||(2*is>=N)) { ret_ntip = 0; goto cleanup; }
       
       float event;
       if( (is==0) ){ event = 0;}
       else{ event = (float)(rand()*(npt*(l+m)+npopS*ls)/(double)(RAND_MAX)); }//which type of event: 1. spe 2. ext 3. H switch
       if(event<=npt*l){  //speciation
-	if(2*(is+1)>=N) return(0);
+	if(2*(is+1)>=N) { ret_ntip = 0; goto cleanup; }
 	int pts = rand()%npt; //choose P which speciates
 	//add children P to edge list
 	P_edge[is*4]   = pt[pts]; //change size
@@ -264,7 +267,7 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
 	  is_tip[pt[pte]] = true;
 	  pt[pte] = pt[npt-1]; 	  
 	  npt--;
-	  if((npt==0)||(2*is>=N)) return 0;
+	  if((npt==0)||(2*is>=N)) { ret_ntip = 0; goto cleanup; }
 	  ntip++;
 	  npopS -= nedges[pt[pte]];//the extinct P cannot switch H
 	}else{
@@ -343,7 +346,7 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
 	      }//type 1
 	      break; //each P can only infect a H once 
 	    }else{//cospeciation
-	      if(2*(is+1)>=N) return(0);
+	      if(2*(is+1)>=N) { ret_ntip = 0; goto cleanup; }
 	      //add children P to edge list
 	      P_edge[is*4]   = pt[il]; //change size
 	      P_edge[is*4+1] = ed+1; //change size
@@ -388,9 +391,13 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
   }
   
   for( j=0;j<N*2;j++){ if(edge_alive[j]){is_tip[j+1] = true;ntip++;}}
- 
+  ret_ntip = ntip;
   //reordering the nodes for R phylo class
-  int newnum[2*N]; 
+  newnum = (int*)malloc((2 * N) * sizeof(int));
+  if (newnum == NULL) {
+    ret_ntip = 0;
+    goto cleanup;
+  }
   newnum[0] = ntip+1; //root is after tips
   int numtip = 1;     //tips are first
   int numint = ntip+2; //internal nodes are after the root
@@ -403,25 +410,32 @@ int bd_P_cospe(int* H_edge, float* H_edge_length, int** pedges, int* nedges, boo
   for( j=1;j<2*N;j++){
     if(!edge_alive[j-1]){
       if( is_tip[j] ){//extinct species are second
-	newnum[j]=numtip;
-	numtip++;
+        newnum[j]=numtip;
+        numtip++;
       }else{//internal nodes are last
-	newnum[j]=numint;
-	numint++;
+        newnum[j]=numint;
+        numint++;
       }
     }
   }
   for( j=0;j<is*4;j++){
     P_edge[j] = newnum[P_edge[j]];
   }
+  free(newnum);
+  newnum = NULL;
 
+cleanup:
+  if (newnum != NULL) {
+    free(newnum);
+    newnum = NULL;
+  }
   for( j=0;j<NH-1;j++){
     free(nlistt[j]);
     free(tcur[j]);
   }
   free(nlistt);
   free(tcur);
-  return ntip;
+  return ret_ntip;
 }
 
 
@@ -610,14 +624,30 @@ int main(int argc, char ** argv)//takes the path to an input file as argument
 
     int attempts = 0;
     const int max_attempts = 2000; // avoids infinite loops when parameters are too "extinction-heavy"
+    int consecutive_zero = 0;
+    const int max_consecutive_zero = 100; // stop early if we keep getting empty trees
+
     while(nalive < Nmin && attempts < max_attempts){
       attempts++;
       N = bd_P_cospe(host_E,host_E_length,pedges,nedges,edge_alive,nh,lp,mp,1-Pg,nfP,dge,lswitchl[i],pcol[i],pTmrca,res_E,res_E_length,nmax);
-      printf("\tNumber of tips: %d\n", N);
+
+      if (N == 0) consecutive_zero++;
+      else consecutive_zero = 0;
+
+      // Print occasionally to avoid massive slowdowns from stdout spam
+      if (attempts % 50 == 0 || N > 0) {
+        printf("\tAttempt %d: Number of tips: %d\n", attempts, N);
+      }
 
       nalive = 0;
       for( j=0;j<2*N;j++){
         if(edge_alive[j]) nalive++;
+      }
+
+      if (consecutive_zero >= max_consecutive_zero) {
+        fprintf(stderr, "WARNING: %d consecutive simulations returned N=0 (likely extinction-heavy parameters). Stopping retries early.\n",
+                consecutive_zero);
+        break;
       }
     }
 

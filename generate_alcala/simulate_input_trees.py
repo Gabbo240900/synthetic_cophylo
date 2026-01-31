@@ -8,6 +8,8 @@ import subprocess
 import shutil
 from ete3 import Tree
 from dendropy.simulate import treesim
+import asymmetree.treeevolve as te
+from asymmetree.tools.PhyloTreeTools import to_newick
 import tempfile
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm import tqdm
@@ -51,13 +53,13 @@ class GenerateHostTree:
         os.makedirs(parasite_folder, exist_ok=True)
         output_prefix = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}")
         distrib_path = os.path.join(base_path, f"host_tree_{host_tree_index}_distrib.txt")
-        s = random.uniform(0.5, 0.7)
-        c = random.uniform(0.05, 0.1)
+        s = random.uniform(0.2, 0.4)
+        c = random.uniform(0.2, 0.4)   
 
         cmd = [
             "software/bin/cophylo.out",
             "-l", "0.7",
-            "-m", "0.66",
+            "-m", "0.6",
             '-c', str(c),
             '-s', str(s),
             "-t", str(self.tmrca),
@@ -89,14 +91,12 @@ class GenerateHostTree:
 
 
     def generate_random_tree(self, num_leaves, prefix="H"):
-        """Generates a host tree using a birth-death process with given number of leaves. Add time = 2 also for the host""" 
-        tmp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".nwk")
-        t = treesim.birth_death_tree(birth_rate=0.7, death_rate=0.24, num_extant_tips=num_leaves)
-        t.write(path=tmp_file.name, schema="newick", suppress_rooting=True)
-        tmp_file.close()
-
-        tree = Tree(tmp_file.name)
-
+        s = te.species_tree_n_age(n=num_leaves, model='BDP', age=self.tmrca, birth_rate=0.7, death_rate=0.45)
+        s_nwk = to_newick(s). strip()
+        if not s_nwk.endswith(";"):
+            s_nwk += ";"
+        s_nwk = re.sub(r'(?<=[(,)])(?!(H))(\d+):', r'H\2:', s_nwk)
+        tree = Tree(s_nwk, format=1)
         for idx, leaf in enumerate(tree.iter_leaves()):
             leaf.name = f"{prefix}{idx+1}"
 
@@ -230,12 +230,15 @@ class GenerateHostTree:
             f.write(f"Host_switch = {host_switch}\n")
             f.write("ENDBLOCK\n")
 
-
+    # zipf distribution for specialist parasites
     def save_specialist_distribution(self, tree, folder_path, tree_index): 
-        # zipf distribution s=1.6 probably. Rescale so sum is (1/K to power s).
-        num_leaves = len(tree.get_leaves())
-        weights = np.random.dirichlet([1.0] * (num_leaves + 1))  # Allow parasites to infect multiple hosts
-        values = [f"{w:.6f}" for w in weights]
+        k = len(tree.get_leaves())
+        s = 1.6
+        ranks = np.arange(1, k + 1, dtype=np.float64)
+        probs = 1.0 / np.power(ranks, s)
+        probs = probs / probs.sum()
+
+        values = [f"{p:.6f}" for p in probs]
         output_path = os.path.join(folder_path, f"host_tree_{tree_index}_distrib.txt")
         with open(output_path, "w") as f:
             f.write(" ".join(values))

@@ -4,9 +4,9 @@
 
 # Next things to do 
 
-- fix alcala distribution of parasite being specialist or generalist using zipf with s=1.6 
-- fix alcala host birth function to use 'treesim conditioned on age and number extant tips' 
-- generate alcala data with similar parameters to coala 
+- fix alcala distribution of parasite being specialist or generalist using zipf with s=1.6 - DONE
+- fix alcala host birth function to use 'treesim conditioned on age and number extant tips' -  TREESIM DOES NOT WORK AS INTENDED IT'S EITHER TIPS OR AGE. USED ASYMEMTREE PACKET - DONE
+- generate alcala data with similar parameters to coala - DONE
 - Once alcala and coala are done, look at their reconciliation values 
 - generate asymmetree data with the parameters we chose 
 - tune asymemtree parameters to resemble alcala and coala
