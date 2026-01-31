@@ -42,9 +42,9 @@ python simulate_input_trees.py --num_trees 1000 \
 --output_dir ./generate_host_freq/generated_trees/ 
 
 (l = 0.7
-m = 0.615
+m = 0.645
 s = random.uniform(0, 0.05)
-c = random.uniform(0.7, 1)
+c = random.uniform(0.7, 0.9)
 tmrca = 2
 host_birth = 0.7
 host_death = 0.63
