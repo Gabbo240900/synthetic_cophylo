@@ -173,27 +173,33 @@ def main():
     experiments = [
         {
             "name": "highSwitch",
-            "out_dir": os.path.join(script_dir, "time_analysis/small_time/high_switch"),
+            "out_dir": os.path.join(script_dir, "generated_trees_highSwitch"),
             "h_lambda": (0.7, 0.7),
             "c_lambda": (0.0, 0.05),
             "s_lambda": (0.7, 0.7),
-            "s_her": (1.8, 2.2),
+            "s_her": (2, 2.5),
+            'h_mu': (0.24, 0.24),
+            's_mu': (0.66, 0.66),
         },
         {
             "name": "highCosp",
-            "out_dir": os.path.join(script_dir, "time_analysis/small_time/high_cosp"),
+            "out_dir": os.path.join(script_dir, "generated_trees_highCosp"),
             "h_lambda": (0.7, 0.7),
-            "c_lambda": (1.8, 2.2),
+            "c_lambda": (2, 2.5),
             "s_lambda": (0.7, 0.7),
             "s_her": (0.0, 0.05),
+            'h_mu': (0.63, 0.63),
+            's_mu': (0.645, 0.645),   
         },
         {
             "name": "medium",
-            "out_dir": os.path.join(script_dir, "time_analysis/small_time/medium"),
+            "out_dir": os.path.join(script_dir, "generated_trees_medium"),
             "h_lambda": (0.7, 0.7),
-            "c_lambda": (0.5, 0.8),
+            "c_lambda": (1.5, 1.8),
             "s_lambda": (0.7, 0.7),
-            "s_her": (0.5, 0.8),
+            "s_her": (1.5, 1.8),
+            'h_mu': (0.45, 0.45),
+            's_mu': (0.6, 0.6),
         },
     ]
 
@@ -208,9 +214,9 @@ def main():
             c_lambda = random.uniform(*exp["c_lambda"])
             s_lambda = random.uniform(*exp["s_lambda"])
             s_her = random.uniform(*exp["s_her"])
+            h_mu = random.uniform(*exp["h_mu"])
+            s_mu = random.uniform(*exp["s_mu"])
 
-            h_mu = 0.3 * (h_lambda + c_lambda)
-            s_mu = 0.3 * (s_lambda + c_lambda + s_her)
 
             for time_to_sim in time_grid:
                 generator = GenerateTGLFiles(
