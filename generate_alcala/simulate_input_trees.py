@@ -53,13 +53,13 @@ class GenerateHostTree:
         os.makedirs(parasite_folder, exist_ok=True)
         output_prefix = os.path.join(parasite_folder, f"parasite_tree_{host_tree_index}")
         distrib_path = os.path.join(base_path, f"host_tree_{host_tree_index}_distrib.txt")
-        s = random.uniform(0, 0.05)
-        c = random.uniform(0.7, 0.9)
+        s = random.uniform(0.2, 0.4)
+        c = random.uniform(0.2, 0.4)
 
         cmd = [
             "software/bin/cophylo.out",
             "-l", "0.7",
-            "-m", "0.645",
+            "-m", "0.6",
             '-c', str(c),
             '-s', str(s),
             "-t", str(self.tmrca),
@@ -91,7 +91,7 @@ class GenerateHostTree:
 
 
     def generate_random_tree(self, num_leaves, prefix="H"):
-        s = te.species_tree_n_age(n=num_leaves, model='BDP', age=self.tmrca, birth_rate=0.7, death_rate=0.63)
+        s = te.species_tree_n_age(n=num_leaves, model='BDP', age=self.tmrca, birth_rate=0.7, death_rate=0.45)
         s_nwk = to_newick(s). strip()
         if not s_nwk.endswith(";"):
             s_nwk += ";"

@@ -27,7 +27,7 @@
 
 ## simulate with Alcala model high Switch
 python simulate_input_trees.py --num_trees 1000 \
---min_leaves 10 --max_leaves 50 \
+--min_leaves 15 --max_leaves 50 \
 --output_dir generated_trees/ 
 
 
