@@ -14,5 +14,7 @@
 .DS_Store
 *.nwk
 *.xlsx 
+*.csv
+
 
 
