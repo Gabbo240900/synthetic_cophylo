@@ -5,6 +5,7 @@ For cophylo instead you need to run the generator three different times with the
 
 Below you find the code to run the respective models.
 
+Make sure you have the reuiqred python paclages from reuiqrments.txt and the required R libriareis in renv.lock
 ## Coala
 
 python ..generate_coala/simulate_input_trees.py --num_trees 10000 	\
