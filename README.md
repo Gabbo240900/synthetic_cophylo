@@ -1,3 +1,7 @@
+#  Similarities, differences and biases in cophylogenetic models for host-symbiont coevolution
+
+This project contains the code to reproduce data shown in the paper ' Similarities, differences and biases in cophylogenetic models for host-symbiont coevolution'. The repository also contains a detailed jupter notebook with all the different anaylsis that have been presented in the experiment section of the aforementioned paper. 
+
 # How to run the models 
 
 Coala, treeducken, and Asymmetree do not require you to change input parameters to reproduce the data we show in our paper. 
