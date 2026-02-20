@@ -15,7 +15,7 @@
 *.nwk
 *.xlsx 
 *.csv
-**/generated_trees/**
+generated_trees
 
 
 
