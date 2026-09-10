@@ -22,7 +22,7 @@ host_symb_sets <- sim_cophyBD(
   host_exp_rate = s_her,
   time_to_sim = time_to_sim,
   numbsim = 1,
-  hs_mode = 'both'
+  hs_mode = 'switch'
 )
 
 # Output folders

@@ -117,9 +117,9 @@ class GenerateTGLFiles:
             "Cospeciations",
             "Host_Spreads/switches",
             "Symbiont_Speciations",
-            "Host_Extinctions",
+            #"Host_Extinctions",
             "Symbiont_Extinctions",
-            'Host_Speciations'
+            #'Host_Speciations'
         ]
         total_events = summary_df[event_keys].sum()
         for key in event_keys:
@@ -178,7 +178,7 @@ def main():
             "c_lambda": (0.0, 0.05),
             "s_lambda": (0.7, 0.7),
             "s_her": (2, 2.5),
-            'h_mu': (0.24, 0.24),
+            #'h_mu': (0.24, 0.24),
             's_mu': (0.66, 0.66),
         },
         {
@@ -188,7 +188,7 @@ def main():
             "c_lambda": (2, 2.5),
             "s_lambda": (0.7, 0.7),
             "s_her": (0.0, 0.05),
-            'h_mu': (0.63, 0.63),
+            #'h_mu': (0.63, 0.63),
             's_mu': (0.645, 0.645),   
         },
         {
@@ -198,7 +198,7 @@ def main():
             "c_lambda": (1.5, 1.8),
             "s_lambda": (0.7, 0.7),
             "s_her": (1.5, 1.8),
-            'h_mu': (0.45, 0.45),
+            #'h_mu': (0.45, 0.45),
             's_mu': (0.6, 0.6),
         },
     ]
@@ -214,8 +214,8 @@ def main():
             c_lambda = random.uniform(*exp["c_lambda"])
             s_lambda = random.uniform(*exp["s_lambda"])
             s_her = random.uniform(*exp["s_her"])
-            h_mu = random.uniform(*exp["h_mu"])
-            s_mu = random.uniform(*exp["s_mu"])
+            h_mu = random.uniform(0.3, 0.8) * (h_lambda + c_lambda) # 0.3 to 0.8 for the random vlaue used to create 
+            s_mu = random.uniform(0.3, 0.8) * (s_lambda + c_lambda + s_her) # 0.3 to 0.8 for the random vlaue used to create 
 
 
             for time_to_sim in time_grid:
