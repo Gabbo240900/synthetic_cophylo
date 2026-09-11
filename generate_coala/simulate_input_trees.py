@@ -19,6 +19,8 @@ def find_default_jar_path():
     """Try to locate TGLGenerator.jar if --jar_path is not provided."""
     candidates = [
         os.environ.get("COALA_TGL_JAR"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "cophylogeny-ML", "code", "coala", "TGLGenerator.jar"),
         os.path.join(os.path.dirname(__file__), "TGLGenerator.jar"),
         os.path.abspath("TGLGenerator.jar"),
         os.path.abspath(os.path.join("..", "TGLGenerator.jar")),

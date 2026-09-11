@@ -1,3 +1,11 @@
+# This script is run from generate_treeducken/, so the project's .Rprofile is
+# not picked up; activate the renv library of the repository root explicitly.
+if (file.exists("../renv/activate.R")) {
+  owd <- setwd("..")
+  source("renv/activate.R")
+  setwd(owd)
+}
+
 library(treeducken)
 library(ape)
 

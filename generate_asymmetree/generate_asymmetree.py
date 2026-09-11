@@ -6,9 +6,17 @@ import re
 import os
 import csv 
 import random
+import argparse
 
-base_path = "/Users/gabriele/synthetic_cophylo/generate_asymmetree/generated_trees"
-num_trees = 1000
+parser = argparse.ArgumentParser(description="Generate AsymmeTree host/symbiont datasets for the three regimes.")
+parser.add_argument("--num_trees", type=int, default=1000, help="Number of datasets to generate per regime")
+parser.add_argument("--output_dir", type=str,
+                    default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "generated_trees"),
+                    help="Output directory (default: generate_asymmetree/generated_trees)")
+args = parser.parse_args()
+
+base_path = args.output_dir
+num_trees = args.num_trees
 species_pattern = re.compile(r'(?<=\(|,)(\d+):')
 gene_pattern = re.compile(r'(?<=[\(|,|)])(\d+)(?=(?:<|:))')
 assoc_pattern = re.compile(r'<(\d+(?:-\d+)*)>')
