@@ -1,4 +1,4 @@
-#  Similarities, differences and biases in cophylogenetic models for host-symbiont coevolution
+#  Cophylogeny simulators are not interchangeable: similarities, differences and structural biases in synthetic host–symbiont dataa
 
 This project contains the code to reproduce data shown in the paper ' Similarities, differences and biases in cophylogenetic models for host-symbiont coevolution'. The repository also contains a detailed jupter notebook with all the different anaylsis that have been presented in the experiment section of the aforementioned paper. 
 
