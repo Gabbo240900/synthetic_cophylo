@@ -1,0 +1,35 @@
+#NEXUS
+BEGIN HOST;
+    TREE * Host1 = ((H1:0.2694371231,H2:0.02111260784):0.61359824,(H3:0.103210124,H4:0.1420803403):0.7409550228):0.1169646369;;
+ENDBLOCK;
+
+BEGIN PARASITE;
+    TREE * Para1 = ((P2:0.3549545242,P3:0.3938247405):0.5182730795,(((P8:0.006004884832,P9:0.006004884832):0.5237303643,P1:0.2654838582):0.3533001139,((P5:0.210928004,(P6:0.2341419188,P7:0.2341419188):0.01565630153):0.03421147555,P4:0.2840096959):0.5990256671):0.02906245696):0.08790217999;;
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+    RANGE
+		P3: H4
+		P4: H4
+		P6: H1
+		P6: H4
+		P7: H1
+		P8: H1
+		P9: H1
+    ;
+END;
+
+Cospeciations             0.066667
+Host_Speciations          0.133333
+Host_Extinctions          0.133333
+Symbiont_Speciations      0.200000
+Symbiont_Extinctions      0.200000
+Host_Spreads/switches     0.266667
+Dispersals                0.000000
+Extirpations              0.000000
+Parafit_Stat                   NaN
+Parafit_P-value                NaN
+Host_num_leaves           4.000000
+Parasite_num_leaves       9.000000
+Sim_time                  1.000000
+Total Events             15.000000

@@ -1,0 +1,49 @@
+#NEXUS
+BEGIN HOST;
+    TREE * Host1 = ((H1:0.3658486533,(H5:0.07938906382,(H6:0.01991423956,H7:0.01991423956):0.05947482426):0.2864595894):0.2147508899,(H2:0.1548516873,(H3:0.149300954,H4:0.149300954):0.005550733313):0.4257478559):0.4194004568;;
+ENDBLOCK;
+
+BEGIN PARASITE;
+    TREE * Para1 = ((((P7:0.05110313524,P8:0.05110313524):0.2059371868,P4:0.2570403221):0.1862513037,P1:0.3521590531):0.1315119883,((P2:0.2760202354,P3:0.2516647485):0.07093473085,(P5:0.1500515117,P6:0.1500515117):0.1969034546):0.2278486477):0.425196386;;
+ENDBLOCK;
+
+BEGIN DISTRIBUTION;
+    RANGE
+		P2: H1
+		P2: H2
+		P2: H5
+		P4: H4
+		P4: H5
+		P4: H6
+		P5: H1
+		P5: H2
+		P5: H3
+		P5: H4
+		P5: H5
+		P5: H7
+		P6: H1
+		P6: H2
+		P6: H4
+		P6: H5
+		P7: H2
+		P7: H3
+		P7: H4
+		P7: H5
+		P8: H1
+    ;
+END;
+
+Cospeciations             0.000000
+Host_Speciations          0.400000
+Host_Extinctions          0.000000
+Symbiont_Speciations      0.400000
+Symbiont_Extinctions      0.133333
+Host_Spreads/switches     0.066667
+Dispersals                0.000000
+Extirpations              0.000000
+Parafit_Stat              0.005416
+Parafit_P-value           0.990000
+Host_num_leaves           7.000000
+Parasite_num_leaves       8.000000
+Sim_time                  1.000000
+Total Events             15.000000
