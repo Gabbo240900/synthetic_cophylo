@@ -11,12 +11,23 @@
 *.png 
 .DS_Store
 *.nwk
-*.xlsx 
+*.xlsx
+!synthetic_data_capybara_results*.xlsx
 *.csv
-generated_trees
+# Generator intermediate files; only the Dataset(s)/ folders are kept
+generate_treeducken/generated_trees
+generate_coala/generated_trees/*/hosts/
+generate_coala/generated_trees/*/output_parasite_with_lengths/
+# Analysis notebook outputs
+capybara_checkpoints/
+capybara_downstream_outputs/
+downstream_figures/
+downstream_tables/
+target_region_outputs/
 
 
 
 
 .venv/
 treeducken.Makevars
+__pycache__/

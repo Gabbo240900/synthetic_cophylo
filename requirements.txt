@@ -10,11 +10,13 @@ numpy==1.26.4
 pandas==2.3.3
 tqdm==4.67.1
 
-# Analysis notebook (Analyze_trees.ipynb)
+# Analysis notebooks
 networkx==3.6.1
 scipy==1.16.3
+scikit-learn==1.8.0
 matplotlib==3.10.8
 seaborn==0.13.2
 openpyxl==3.1.5
+capybara-cophylogeny==0.0.9
 jupyterlab
 ipykernel
